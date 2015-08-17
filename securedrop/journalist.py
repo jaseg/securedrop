@@ -101,6 +101,7 @@ def admin_required(func):
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
+    raise Exception()
     if request.method == 'POST':
         try:
             user = Journalist.login(request.form['username'],
@@ -580,5 +581,5 @@ def write_pidfile():
 
 if __name__ == "__main__":
     write_pidfile()
-    # TODO make sure debug=False in production
-    app.run(debug=True, host='0.0.0.0', port=8081)
+    debug = getattr(config, 'env', 'prod') != 'prod'
+    app.run(debug=debug, host='0.0.0.0', port=8081)

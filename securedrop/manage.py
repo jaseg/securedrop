@@ -17,6 +17,10 @@ import psutil
 
 from db import db_session, Journalist
 
+from babel.messages import frontend as babel
+from babel.messages.extract import DEFAULT_KEYWORDS as BABEL_DEFAULT_KEYWORDS
+from distutils.dist import Distribution
+
 from management import run
 
 # We need to import config in each function because we're running the tests
@@ -31,6 +35,9 @@ os.environ['SECUREDROP_ENV'] = 'dev'
 # When refactoring the test suite, the TEST_WORKER_PIDFILE
 # TEST_WORKER_PIDFILE is also hard-coded in `tests/common.py`.
 TEST_WORKER_PIDFILE = "/tmp/securedrop_test_worker.pid"
+
+BABEL_TRANSLATIONS_DIR = './translations'
+BABEL_MESSAGES_FILE = './translations/messages.pot'
 
 
 def get_pid_from_pidfile(pid_file_name):
@@ -63,7 +70,7 @@ def _stop_test_rqworker():
     os.kill(get_pid_from_pidfile(TEST_WORKER_PIDFILE), signal.SIGTERM)
 
 
-def test():
+def test(argv):
     """
     Runs the test suite
     """
@@ -76,7 +83,7 @@ def test():
     sys.exit(test_rc)
 
 
-def test_unit():
+def test_unit(argv):
     """
     Runs the unit tests.
     """
@@ -88,7 +95,7 @@ def test_unit():
     sys.exit(test_rc)
 
 
-def reset():
+def reset(argv):
     """
     Clears the SecureDrop development application's state, restoring it to the
     way it was immediately after running `setup_dev.sh`. This command:
@@ -113,7 +120,7 @@ def reset():
         shutil.rmtree(os.path.join(config.STORE_DIR, source_dir))
 
 
-def add_admin():
+def add_admin(argv):
     while True:
         username = raw_input("Username: ")
         if Journalist.query.filter_by(username=username).first():
@@ -177,7 +184,7 @@ def add_admin():
             print
 
 
-def clean_tmp():
+def clean_tmp(argv):
     """Cleanup the SecureDrop temp directory. This is intended to be run as an
     automated cron job. We skip files that are currently in use to avoid
     deleting files that are currently being downloaded."""
@@ -212,6 +219,56 @@ def clean_tmp():
             os.remove(path)
 
 
+def add_translations(argv):
+    for arg in argv:
+        init = babel.init_catalog(Distribution())
+        init.initialize_options()
+
+        init.input_file = BABEL_MESSAGES_FILE
+        init.locale = arg
+        init.output_dir = BABEL_TRANSLATIONS_DIR
+        init.no_wrap = True
+
+        init.finalize_options()
+        init.run()
+
+
+def update_translations(argv):
+    extract = babel.extract_messages(Distribution())
+    extract.initialize_options()
+
+    extract.input_dirs = '., source_templates, journalist_templates'
+    extract.mapping_file = './babel.cfg'
+    extract.output_file = BABEL_MESSAGES_FILE
+    extract.no_wrap = True
+
+    extract.finalize_options()
+    extract.run()
+
+    update = babel.update_catalog(Distribution())
+    update.initialize_options()
+
+    update.locale = 'en'
+    update.ignore_obsolete = True
+    update.input_file = BABEL_MESSAGES_FILE
+    update.no_wrap = True
+    update.output_dir = BABEL_TRANSLATIONS_DIR
+    update.output_file = BABEL_MESSAGES_FILE
+
+    update.finalize_options()
+    update.run()
+
+
+def compile_translations(argv):
+    catalog = babel.compile_catalog(Distribution())
+    catalog.initialize_options()
+
+    catalog.directory = BABEL_TRANSLATIONS_DIR
+
+    catalog.finalize_options()
+    catalog.run()
+
+
 def main():
     valid_cmds = [
         "run",
@@ -219,17 +276,25 @@ def main():
         "test",
         "reset",
         "add_admin",
-        "clean_tmp"]
-    help_str = "./manage.py {{{0}}}".format(','.join(valid_cmds))
+        "clean_tmp",
+        "add_translations",
+        "update_translations",
+        "compile_translations"]
+    help_str = "./manage.py {{ {0} }}".format(', '.join(valid_cmds))
 
-    if len(sys.argv) != 2 or sys.argv[1] not in valid_cmds:
+    if len(sys.argv) < 2 or sys.argv[1] not in valid_cmds:
         print help_str
         sys.exit(1)
 
     cmd = sys.argv[1]
+    args = sys.argv[2:]
 
     try:
-        getattr(sys.modules[__name__], cmd)()
+        if cmd == 'run':
+            run()  # TypeError when passed arguments
+        else:
+            # TODO figure out how to print err messages
+            getattr(sys.modules[__name__], cmd)(args)
     except KeyboardInterrupt:
         print  # So our prompt appears on a nice new line
 

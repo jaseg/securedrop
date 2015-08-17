@@ -156,7 +156,7 @@ class TestJournalist(TestCase):
 
     def test_bulk_download(self):
         sid = 'EQZGCJBRGISGOTC2NZVWG6LILJBHEV3CINNEWSCLLFTUWZJPKJFECLS2NZ4G4U3QOZCFKTTPNZMVIWDCJBBHMUDBGFHXCQ3R'
-        source = Source(sid, crypto_util.display_id())
+        source = Source(sid, crypto_util.display_id('en_US'))
         db_session.add(source)
         db_session.commit()
         files = ['1-abc1-msg.gpg', '2-abc2-msg.gpg']

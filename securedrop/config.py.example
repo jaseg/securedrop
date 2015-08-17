@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 # Default values for production, may be overridden later based on environment
@@ -83,3 +84,11 @@ TEMP_DIR = os.path.join(SECUREDROP_DATA_ROOT, "tmp")
 DATABASE_ENGINE = 'sqlite'
 DATABASE_FILE = os.path.join(SECUREDROP_DATA_ROOT, 'db.sqlite')
 
+# For Babel
+LOCALES = {
+    'en_US': 'English (US)',
+    'de_DE': 'Deutsch (Deutschland)'
+}
+
+DEFAULT_SOURCE_LOCALE = 'en_US'
+DEFAULT_JOURNALIST_LOCALE = 'en_US'

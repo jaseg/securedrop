@@ -20,6 +20,10 @@ case "$1" in
     configure)
     pip install --no-index --find-links=/var/securedrop/wheelhouse -r /var/www/securedrop/requirements/securedrop-requirements.txt
 
+    # compile language files and remove ones not direcly used by the app
+    pybabel compile -f /var/www/securedrop/translations/messages.pot -d /var/www/securedrop/translations
+    find /var/www/securedrop/translations -regex '^*.pot?$' -type f -exec rm -f {} \;
+
     chown -R www-data:www-data /var/www/securedrop
     chown www-data:www-data /var/www/document.wsgi
     chown www-data:www-data /var/www/source.wsgi

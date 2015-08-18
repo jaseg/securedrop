@@ -18,81 +18,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.0\n"
 
-#: journalist.py:129
+#: journalist.py:128
 msgid "You must be an administrator to access that page"
 msgstr ""
 
-#: journalist.py:145
+#: journalist.py:144
 msgid "Login failed."
 msgstr ""
 
-#: journalist.py:148
+#: journalist.py:147
 msgid "Please wait at least 60 seconds before logging in again."
 msgstr ""
 
-#: journalist.py:155
+#: journalist.py:154
 msgid "Please wait for a new two-factor token before logging in again."
 msgstr ""
 
-#: journalist.py:197
+#: journalist.py:196
 msgid "Missing username"
 msgstr ""
 
-#: journalist.py:203 journalist.py:295
+#: journalist.py:202 journalist.py:294
 msgid "Passwords didn't match"
 msgstr ""
 
-#: journalist.py:220 journalist.py:300
+#: journalist.py:219 journalist.py:299
 msgid "Your password is too long (maximum length {length} characters)"
 msgstr ""
 
-#: journalist.py:226 journalist.py:313
+#: journalist.py:225 journalist.py:312
 msgid "That username is already in use"
 msgstr ""
 
-#: journalist.py:229
+#: journalist.py:228
 msgid "An error occurred saving this user to the database"
 msgstr ""
 
-#: journalist.py:249
+#: journalist.py:248
 msgid "Two factor token successfully verified for user {username}!"
 msgstr ""
 
-#: journalist.py:254
+#: journalist.py:253
 msgid "Two factor token failed to verify"
 msgstr ""
 
-#: journalist.py:316
+#: journalist.py:315
 msgid "An unknown error occurred, please inform your administrator"
 msgstr ""
 
-#: journalist.py:451
+#: journalist.py:450
 msgid "{source_journalist_designation}'s collection deleted"
 msgstr ""
 
-#: journalist.py:460 journalist.py:546
+#: journalist.py:459 journalist.py:545
 msgid "No collections selected to delete!"
 msgstr ""
 
-#: journalist.py:465
+#: journalist.py:464
 msgid "{num} collection deleted"
 msgid_plural "{num} collections deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: journalist.py:498
+#: journalist.py:497
 msgid "Thanks! Your reply has been stored."
 msgstr ""
 
-#: journalist.py:515
+#: journalist.py:514
 msgid "The source '{original_journalist_designation}' has been renamed to '{source_journalist_designation}'"
 msgstr ""
 
-#: journalist.py:544
+#: journalist.py:543
 msgid "No collections selected to download!"
 msgstr ""
 
-#: journalist.py:573
+#: journalist.py:572
 msgid "Submission deleted."
 msgid_plural "Submissions deleted."
 msgstr[0] ""
@@ -190,7 +190,7 @@ msgid "Edit user '{username}'"
 msgstr ""
 
 #: journalist_templates/admin.html:26
-msgid "Delete user '{username}'"
+msgid "Delete user {username}"
 msgstr ""
 
 #: journalist_templates/admin.html:38
@@ -229,7 +229,7 @@ msgid "Change Secret"
 msgstr ""
 
 #: journalist_templates/admin_edit_hotp_secret.html:10
-#: source_templates/generate.html:38 source_templates/login.html:11
+#: source_templates/generate.html:42 source_templates/login.html:11
 msgid "Continue"
 msgstr ""
 
@@ -538,15 +538,15 @@ msgid_plural "{n} words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: source_templates/generate.html:30
+#: source_templates/generate.html:34
 msgid "After you submit documents and messages, you can return to this SecureDrop site later to read replies from journalists and submit more information. <strong>You will need this codename to log in.</strong> This is the only way we can communicate back to you."
 msgstr ""
 
-#: source_templates/generate.html:32
+#: source_templates/generate.html:36
 msgid "The best way to protect your codename is to memorize it. If you cannot memorize it right away, we recommend writing it down and keeping it in a safe place at first, and gradually working to memorize it over time. Once you have memorized it, you should destroy the written copy."
 msgstr ""
 
-#: source_templates/generate.html:39
+#: source_templates/generate.html:43
 msgid "Already have a codename?"
 msgstr ""
 

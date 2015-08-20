@@ -7,7 +7,7 @@ import socket
 import shutil
 import os
 import gnupg
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import sys
 
 
@@ -16,7 +16,7 @@ import config
 import source
 import journalist
 from tests import common
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import signal
 import traceback

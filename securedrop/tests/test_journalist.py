@@ -3,7 +3,7 @@ import unittest
 from mock import patch, ANY, MagicMock
 
 import journalist
-import common
+from . import common
 from db import Journalist, InvalidPasswordLength, db_session
 
 class TestJournalist(unittest.TestCase):
@@ -122,7 +122,7 @@ class TestJournalistLogin(unittest.TestCase):
     @patch('db.Journalist._scrypt_hash')
     def test_login_with_invalid_length_password_doesnt_call_scrypt(
             self, mock_scrypt_hash):
-        print "test_login_with_invalid_length_password_calls_scrypt"
+        print("test_login_with_invalid_length_password_calls_scrypt")
         invalid_pw = 'a'*(Journalist.MAX_PASSWORD_LEN + 1)
         with self.assertRaises(InvalidPasswordLength):
             self.login(self.username, invalid_pw)

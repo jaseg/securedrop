@@ -47,7 +47,7 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
+    locale = session.get("locale") or request.accept_languages.best_match(list(config.LOCALES.keys()))
     if locale and locale in getattr(config, 'LOCALES', [app.default_journalist_locale]):
         return locale
     else:
@@ -88,7 +88,7 @@ def setup_g():
     try:
         if 'l' in request.args:
             locale = request.args['l']
-            if locale in config.LOCALES.keys():
+            if locale in list(config.LOCALES.keys()):
                 session['locale'] = locale
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']

@@ -21,25 +21,25 @@ class TestGenwordlist:
         assert output == words
 
     def test_accepts_valid_unicode(self):
-        words = {u'föö', u'bår', u'bæz'}
+        words = {'föö', 'bår', 'bæz'}
         output = set()
         filter_word_list(words, lambda word: output.add(word))
         assert output == words
 
     def test_rejects_punctuation(self):
-        words = {'foo.', '!bar', 'b{a}z', u'quüx?'}
+        words = {'foo.', '!bar', 'b{a}z', 'quüx?'}
         output = set()
         filter_word_list(words, lambda word: output.add(word))
         assert not output
 
     def test_rejects_bigrams(self):
-        words = {'aa', 'ab', u'öö', u'oö'}
+        words = {'aa', 'ab', 'öö', 'oö'}
         output = set()
         filter_word_list(words, lambda word: output.add(word))
         assert not output
 
     def test_rejects_repeated_char_words(self):
-        words = {'aaaa', u'öööö', 'aaaaaaaa', 'aaaabcde'}
+        words = {'aaaa', 'öööö', 'aaaaaaaa', 'aaaabcde'}
         output = set()
         filter_word_list(words, lambda word: output.add(word))
         assert not output

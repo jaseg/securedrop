@@ -4,7 +4,7 @@ from datetime import datetime
 import uuid
 from functools import wraps
 import zipfile
-from cStringIO import StringIO
+from io import StringIO
 import subprocess
 from threading import Thread
 import operator
@@ -60,7 +60,7 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
+    locale = session.get("locale") or request.accept_languages.best_match(list(config.LOCALES.keys()))
     if locale and locale in getattr(config, 'LOCALES', [app.source_default_locale]):
         return locale
     else:
@@ -109,7 +109,7 @@ def setup_g():
     try:
         if 'l' in request.args:
             locale = request.args['l']
-            if locale in config.LOCALES.keys():
+            if locale in list(config.LOCALES.keys()):
                 session['locale'] = locale
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']
@@ -193,7 +193,7 @@ def generate():
     num_words = 7
     if request.method == 'POST':
         num_words = int(request.form['number-words'])
-        if num_words not in range(7, 11):
+        if num_words not in list(range(7, 11)):
             abort(403)
 
     codename = generate_unique_codename(num_words)

@@ -162,9 +162,7 @@ def getkey(name):
 
 
 def get_key_by_fingerprint(fingerprint):
-    matches = filter(
-        lambda k: k['fingerprint'] == fingerprint,
-        gpg.list_keys())
+    matches = [k for k in gpg.list_keys() if k['fingerprint'] == fingerprint]
     return matches[0] if matches else None
 
 
@@ -180,7 +178,7 @@ def encrypt(plaintext, fingerprints, output=None):
         fingerprints = [fingerprints, ]
     fingerprints = [fpr.replace(' ', '') for fpr in fingerprints]
 
-    if isinstance(plaintext, unicode):
+    if isinstance(plaintext, str):
         plaintext = plaintext.encode('utf8')
 
     encrypt_fn = gpg.encrypt if isinstance(

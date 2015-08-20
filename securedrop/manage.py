@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import atexit
 import sys
@@ -122,9 +122,9 @@ def reset(argv):
 
 def add_admin(argv):
     while True:
-        username = raw_input("Username: ")
+        username = input("Username: ")
         if Journalist.query.filter_by(username=username).first():
-            print "Sorry, that username is already in use."
+            print("Sorry, that username is already in use.")
         else:
             break
 
@@ -132,22 +132,22 @@ def add_admin(argv):
         password = getpass("Password: ")
 
         if len(password) > Journalist.MAX_PASSWORD_LEN:
-            print ("Your password is too long (maximum length {} characters). "
+            print(("Your password is too long (maximum length {} characters). "
                    "Please pick a shorter password.".format(
-                   Journalist.MAX_PASSWORD_LEN))
+                   Journalist.MAX_PASSWORD_LEN)))
             continue
 
         password_again = getpass("Confirm Password: ")
 
         if password == password_again:
             break
-        print "Passwords didn't match!"
+        print("Passwords didn't match!")
 
-    hotp_input = raw_input("Is this admin using a YubiKey [HOTP]? (y/N): ")
+    hotp_input = input("Is this admin using a YubiKey [HOTP]? (y/N): ")
     otp_secret = None
     if hotp_input.lower() == "y" or hotp_input.lower() == "yes":
         while True:
-            otp_secret = raw_input(
+            otp_secret = input(
                 "Please configure your YubiKey and enter the secret: ")
             if otp_secret:
                 break
@@ -161,28 +161,28 @@ def add_admin(argv):
         db_session.commit()
     except Exception as e:
         if "username is not unique" in str(e):
-            print "ERROR: That username is already taken!"
+            print("ERROR: That username is already taken!")
         else:
-            print "ERROR: An unexpected error occurred, traceback: \n{}".format(e)
+            print("ERROR: An unexpected error occurred, traceback: \n{}".format(e))
     else:
-        print "Admin '{}' successfully added".format(username)
+        print("Admin '{}' successfully added".format(username))
         if not otp_secret:
             # Print the QR code for Google Authenticator
-            print
-            print "Scan the QR code below with Google Authenticator:"
-            print
+            print()
+            print("Scan the QR code below with Google Authenticator:")
+            print()
             uri = admin.totp.provisioning_uri(
                 username,
                 issuer_name="SecureDrop")
             qr = qrcode.QRCode()
             qr.add_data(uri)
             qr.print_ascii(tty=sys.stdout.isatty())
-            print
-            print "If the barcode does not render correctly, try changing your terminal's font, (Monospace for Linux, Menlo for OS X)."
-            print "If you are using iTerm on Mac OS X, you will need to change the \"Non-ASCII Font\", which is your profile's Text settings."
-            print
-            print "Can't scan the barcode? Enter the shared secret manually: {}".format(admin.formatted_otp_secret)
-            print
+            print()
+            print("If the barcode does not render correctly, try changing your terminal's font, (Monospace for Linux, Menlo for OS X).")
+            print("If you are using iTerm on Mac OS X, you will need to change the \"Non-ASCII Font\", which is your profile's Text settings.")
+            print()
+            print("Can't scan the barcode? Enter the shared secret manually: {}".format(admin.formatted_otp_secret))
+            print()
 
 
 def clean_tmp(argv):
@@ -284,7 +284,7 @@ def main():
     help_str = "./manage.py {{ {0} }}".format(', '.join(valid_cmds))
 
     if len(sys.argv) < 2 or sys.argv[1] not in valid_cmds:
-        print help_str
+        print(help_str)
         sys.exit(1)
 
     cmd = sys.argv[1]
@@ -297,7 +297,7 @@ def main():
             # TODO figure out how to print err messages
             getattr(sys.modules[__name__], cmd)(args)
     except KeyboardInterrupt:
-        print  # So our prompt appears on a nice new line
+        print()  # So our prompt appears on a nice new line
 
 
 if __name__ == "__main__":

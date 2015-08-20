@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import common
+from . import common
 import os
 import re
 import unittest
-from cStringIO import StringIO
+from io import StringIO
 
 from bs4 import BeautifulSoup
 from flask.ext.testing import TestCase
@@ -60,7 +60,7 @@ class TestSource(TestCase):
 
     def test_regenerate_valid_lengths(self):
         """Make sure we can regenerate all valid length codenames"""
-        for codename_len in xrange(7, 11):
+        for codename_len in range(7, 11):
             response = self.client.post('/generate', data={
                 'number-words': str(codename_len),
             })

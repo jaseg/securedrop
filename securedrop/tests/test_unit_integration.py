@@ -3,7 +3,7 @@
 import os
 import unittest
 import re
-from cStringIO import StringIO
+from io import StringIO
 import zipfile
 from time import sleep
 import tempfile
@@ -21,7 +21,7 @@ import config
 import crypto_util
 import source
 import journalist
-import common
+from . import common
 from db import db_session, Journalist
 import store
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-from cStringIO import StringIO
+from io import StringIO
 import unittest
 import zipfile
 
@@ -12,7 +12,7 @@ from flask.ext.testing import TestCase
 
 import crypto_util
 import journalist
-import common
+from . import common
 from db import db_session, Source, Journalist, InvalidPasswordLength
 
 # Set environment variable so config.py uses a test environment

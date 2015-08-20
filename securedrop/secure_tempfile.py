@@ -64,7 +64,7 @@ class SecureTemporaryFile(_TemporaryFileWrapper):
         self.last_action = 'write'
 
         try:
-            if isinstance(data, unicode):
+            if isinstance(data, str):
                 data = data.encode('utf-8')
             self.file.write(self.encryptor.encrypt(data))
         except Exception as err:

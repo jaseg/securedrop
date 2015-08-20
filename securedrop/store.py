@@ -7,7 +7,7 @@ import crypto_util
 import uuid
 import tempfile
 import subprocess
-from cStringIO import StringIO
+from io import StringIO
 import gzip
 from werkzeug import secure_filename
 

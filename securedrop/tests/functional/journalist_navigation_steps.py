@@ -1,4 +1,4 @@
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import tempfile
 import zipfile
 import gzip
@@ -214,9 +214,7 @@ class JournalistNavigationSteps():
         self._check_login_with_skewed_otp()
 
     def _edit_user(self, username):
-        new_user_edit_links = filter(
-            lambda el: el.get_attribute('data-username') == username,
-            self.driver.find_elements_by_tag_name('a'))
+        new_user_edit_links = [el for el in self.driver.find_elements_by_tag_name('a') if el.get_attribute('data-username') == username]
         self.assertEquals(len(new_user_edit_links), 1)
         new_user_edit_links[0].click()
 
@@ -234,9 +232,7 @@ class JournalistNavigationSteps():
 
         # Click the "edit user" link for the new user
         # self._edit_user(self.new_user['username'])
-        new_user_edit_links = filter(
-            lambda el: el.get_attribute('data-username') == self.new_user['username'],
-            self.driver.find_elements_by_tag_name('a'))
+        new_user_edit_links = [el for el in self.driver.find_elements_by_tag_name('a') if el.get_attribute('data-username') == self.new_user['username']]
         self.assertEquals(len(new_user_edit_links), 1)
         new_user_edit_links[0].click()
         self.wait_for(
@@ -345,12 +341,12 @@ class JournalistNavigationSteps():
                 cookie_strs.append(cookie_str)
             return ' '.join(cookie_strs)
 
-        submission_req = urllib2.Request(file_url)
+        submission_req = urllib.request.Request(file_url)
         submission_req.add_header(
             'Cookie',
             cookie_string_from_selenium_cookies(
                 self.driver.get_cookies()))
-        raw_content = urllib2.urlopen(submission_req).read()
+        raw_content = urllib.request.urlopen(submission_req).read()
 
         decrypted_submission = self.gpg.decrypt(raw_content)
         submission = self._get_submission_content(file_url,

@@ -5,7 +5,7 @@ import unittest
 import zipfile
 import config
 import store
-import common
+from . import common
 from db import db_session, Source
 import crypto_util
 

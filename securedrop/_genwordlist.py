@@ -30,7 +30,7 @@ def filter_word_list(words, output_func):
 
 if getattr(config, 'env', 'prod') == 'prod':
     word_set = set()
-    for i in map(chr, range(65, 91)):
+    for i in map(chr, list(range(65, 91))):
         word_set.update(
             x.strip() for x in file(
                 'EOWL-v1.1.2/CSV Format/%s Words.csv' %

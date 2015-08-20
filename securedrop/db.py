@@ -5,9 +5,9 @@ import binascii
 
 # Find the best implementation available on this platform
 try:
-    from cStringIO import StringIO
+    from io import StringIO
 except:
-    from StringIO import StringIO
+    from io import StringIO
 
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship, backref
@@ -49,7 +49,7 @@ else:
         config.DATABASE_NAME, echo=False
     )
 
-engine.raw_connection().connection.text_factory = unicode
+engine.raw_connection().connection.text_factory = str
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -322,7 +322,7 @@ class Journalist(Base):
         lowercase and split into four groups of four characters. The secret is
         base32-encoded, so it is case insensitive."""
         sec = self.otp_secret
-        chunks = [sec[i:i + 4] for i in xrange(0, len(sec), 4)]
+        chunks = [sec[i:i + 4] for i in range(0, len(sec), 4)]
         return ' '.join(chunks).lower()
 
     def _format_token(self, token):
@@ -389,7 +389,7 @@ class Journalist(Base):
         try:
             user = Journalist.query.filter_by(username=username).one()
         except NoResultFound:
-            print 'lol'
+            print('lol')
             raise InvalidUsernameException(
                 "invalid username '{}'".format(username))
 

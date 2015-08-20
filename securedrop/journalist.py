@@ -41,17 +41,17 @@ app.jinja_env.filters['rel_datetimeformat'] = template_filters.datetimeformat
 # Initialize translations
 app.jinja_env.globals['gettext'] = gettext
 app.jinja_env.globals['ngettext'] = ngettext
+app.default_journalist_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 babel = Babel(app)
-default_journalist_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 
 
 @babel.localeselector
 def get_locale():
     locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
-    if locale and locale in getattr(config, 'LOCALES', [default_journalist_locale]):
+    if locale and locale in getattr(config, 'LOCALES', [app.default_journalist_locale]):
         return locale
     else:
-        return default_journalist_locale
+        return app.default_journalist_locale
 
 
 @app.teardown_appcontext
@@ -93,7 +93,7 @@ def setup_g():
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']
     except AttributeError:
-        session['locale'] = default_journalist_locale
+        session['locale'] = app.default_journalist_locale
     # Save the resolved locale in g for templates
     g.resolved_locale = get_locale()
     g.locales = getattr(config, 'LOCALES', None)
@@ -135,8 +135,8 @@ def admin_required(func):
 def login():
     if request.method == 'POST':
         try:
-            user = Journalist.login(request.form['username'],
-                                    request.form['password'],
+            user = Journalist.login(request.form['username'].decode('utf-8'),
+                                    request.form['password'].decode('utf-8'),
                                     request.form['token'])
         except Exception as e:
             app.logger.error("Login for '{}' failed: {}".format(
@@ -148,7 +148,7 @@ def login():
             else:
                 try:
                     user = Journalist.query.filter_by(
-                        username=request.form['username']).one()
+                        username=request.form['username'].decode('utf-8')).one()
                     if user.is_totp:
                         login_flashed_msg += " " + \
                             gettext('Please wait for a new two-factor token before logging in again.')

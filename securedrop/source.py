@@ -53,18 +53,18 @@ app.jinja_env.filters['nl2br'] = evalcontextfilter(template_filters.nl2br)
 # Initialize translations
 app.jinja_env.globals['gettext'] = gettext
 app.jinja_env.globals['ngettext'] = ngettext
+app.source_default_locale = getattr(config, 'DEFAULT_SOURCE_LOCALE', 'en_US')
+app.journalist_default_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 babel = Babel(app)
-source_default_locale = getattr(config, 'DEFAULT_SOURCE_LOCALE', 'en_US')
-journalist_default_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 
 
 @babel.localeselector
 def get_locale():
     locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
-    if locale and locale in getattr(config, 'LOCALES', [source_default_locale]):
+    if locale and locale in getattr(config, 'LOCALES', [app.source_default_locale]):
         return locale
     else:
-        return source_default_locale
+        return app.source_default_locale
 
 
 @app.teardown_appcontext
@@ -114,7 +114,7 @@ def setup_g():
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']
     except AttributeError:
-        session['locale'] = source_default_locale
+        session['locale'] = app.source_default_locale
     # Save the resolved locale in g for templates
     g.resolved_locale = get_locale()
     g.locales = getattr(config, 'LOCALES', None)

@@ -23,7 +23,6 @@ import qrcode
 import qrcode.image.svg
 
 import config
-import crypto_util
 import store
 
 LOGIN_HARDENING = True
@@ -38,7 +37,8 @@ if os.environ.get('SECUREDROP_ENV') == 'test':
 if config.DATABASE_ENGINE == "sqlite":
     engine = create_engine(
         config.DATABASE_ENGINE + ":///" +
-        config.DATABASE_FILE
+        config.DATABASE_FILE,
+        encoding='utf-8'
     )
 else:
     engine = create_engine(
@@ -48,6 +48,8 @@ else:
         config.DATABASE_HOST + '/' +
         config.DATABASE_NAME, echo=False
     )
+
+engine.raw_connection().connection.text_factory = str
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -371,8 +373,10 @@ class Journalist(Base):
         # ...and reject it if they have exceeded the threshold
         login_attempt_period = datetime.datetime.utcnow() - \
             datetime.timedelta(seconds=_LOGIN_ATTEMPT_PERIOD)
+
         attempts_within_period = JournalistLoginAttempt.query.filter(
             JournalistLoginAttempt.timestamp > login_attempt_period).all()
+
         if len(attempts_within_period) > _MAX_LOGIN_ATTEMPTS_PER_PERIOD:
             raise LoginThrottledException(
                 "throttled ({} attempts in last {} seconds)".format(

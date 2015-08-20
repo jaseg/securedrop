@@ -123,20 +123,21 @@ def reset(argv):
 def add_admin(argv):
     while True:
         username = raw_input("Username: ")
-        if Journalist.query.filter_by(username=username).first():
+        if Journalist.query.filter_by(username=username.decode('utf-8')).first():
             print "Sorry, that username is already in use."
         else:
             break
 
     while True:
         password = getpass("Password: ")
-        password_again = getpass("Confirm Password: ")
 
         if len(password) > Journalist.MAX_PASSWORD_LEN:
             print ("Your password is too long (maximum length {} characters). "
                    "Please pick a shorter password.".format(
                    Journalist.MAX_PASSWORD_LEN))
             continue
+
+        password_again = getpass("Confirm Password: ").decode('utf-8')
 
         if password == password_again:
             break
@@ -152,8 +153,8 @@ def add_admin(argv):
                 break
 
     try:
-        admin = Journalist(username=username,
-                           password=password,
+        admin = Journalist(username=username.decode('utf-8'),
+                           password=password.decode('utf-8'),
                            is_admin=True,
                            otp_secret=otp_secret)
         db_session.add(admin)

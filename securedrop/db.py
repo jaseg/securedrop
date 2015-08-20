@@ -49,7 +49,7 @@ else:
         config.DATABASE_NAME, echo=False
     )
 
-engine.raw_connection().connection.text_factory = str
+engine.raw_connection().connection.text_factory = unicode
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -385,9 +385,11 @@ class Journalist(Base):
 
     @classmethod
     def login(cls, username, password, token):
+        user = None
         try:
             user = Journalist.query.filter_by(username=username).one()
         except NoResultFound:
+            print 'lol'
             raise InvalidUsernameException(
                 "invalid username '{}'".format(username))
 

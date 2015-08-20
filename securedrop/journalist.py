@@ -135,8 +135,8 @@ def admin_required(func):
 def login():
     if request.method == 'POST':
         try:
-            user = Journalist.login(request.form['username'].decode('utf-8'),
-                                    request.form['password'].decode('utf-8'),
+            user = Journalist.login(request.form['username'],
+                                    request.form['password'],
                                     request.form['token'])
         except Exception as e:
             app.logger.error("Login for '{}' failed: {}".format(
@@ -148,7 +148,7 @@ def login():
             else:
                 try:
                     user = Journalist.query.filter_by(
-                        username=request.form['username'].decode('utf-8')).one()
+                        username=request.form['username']).one()
                     if user.is_totp:
                         login_flashed_msg += " " + \
                             gettext('Please wait for a new two-factor token before logging in again.')

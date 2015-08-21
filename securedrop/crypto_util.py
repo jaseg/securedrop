@@ -55,39 +55,16 @@ do_runtime_tests()
 # address this: https://github.com/isislovecruft/python-gnupg/issues/96
 gpg = gnupg.GPG(binary='gpg2', homedir=config.GPG_KEY_DIR, use_agent=True)
 
-words = {}
-nouns = {}
-adjectives = {}
+words = file(config.WORD_LIST).read().split('\n')
+nouns = file(config.NOUNS).read().split('\n')
+adjectives = file(config.ADJECTIVES).read().split('\n')
 
 
 class CryptoException(Exception):
     pass
 
 
-def populate_words():
-    if not words:
-        for locale in getattr(config, 'LOCALES', ['en_US']):
-            words[locale] = file(os.path.join(config.WORDS_DIR, locale, 'wordlist.txt')).read().split('\n')
-
-
-def populate_nouns():
-    if not nouns:
-        for locale in getattr(config, 'LOCALES', ['en_US']):
-            nouns[locale] = file(os.path.join(config.WORDS_DIR, locale, 'nouns.txt')).read().split('\n')
-
-
-def populate_adjectives():
-    if not adjectives:
-        for locale in getattr(config, 'LOCALES', ['en_US']):
-            adjectives[locale] = file(os.path.join(config.WORDS_DIR, locale, 'adjectives.txt')).read().split('\n')
-
-
-populate_words()
-populate_nouns()
-populate_adjectives()
-
-
-def clean(string):
+def clean(s, also=''):
     """
     >>> clean("Hello, world!")
     Traceback (most recent call last):
@@ -96,23 +73,23 @@ def clean(string):
     >>> clean("Helloworld")
     'Helloworld'
     """
-    try:
-        # scrypt.hash requires input of type str
-        return str(string.decode("utf-8"))
-    except UnicodeDecodeError:
-        raise CryptoException("invalid input: {0}".format(string))
+    # safe characters for every possible word in the wordlist includes capital
+    # letters because codename hashes are base32-encoded with capital letters
+    ok = ' !#%$&)(+*-1032547698;:=?@acbedgfihkjmlonqpsrutwvyxzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    for c in s:
+        if c not in ok and c not in also:
+            raise CryptoException("invalid input: {0}".format(s))
+    # scrypt.hash requires input of type str. Since the wordlist is all ASCII
+    # characters, this conversion is not problematic
+    return str(s)
 
 
-def genrandomid(locale, words_in_random_id=DEFAULT_WORDS_IN_RANDOM_ID):
-    words_for_locale = words.get(locale)
-    return ' '.join(random.choice(words_for_locale) for _ in range(words_in_random_id))
+def genrandomid(words_in_random_id=DEFAULT_WORDS_IN_RANDOM_ID):
+    return ' '.join(random.choice(words) for x in range(words_in_random_id))
 
 
-def display_id(locale):
-    nouns_for_locale = nouns[locale]
-    adjs_for_locale = adjectives[locale]
-    # TODO Adjectives don't always precede nouns and may be inflected or declined in non-English languages
-    return ' '.join([random.choice(adjs_for_locale), random.choice(nouns_for_locale)])
+def display_id():
+    return ' '.join([random.choice(adjectives), random.choice(nouns)])
 
 
 def hash_codename(codename, salt=SCRYPT_ID_PEPPER):

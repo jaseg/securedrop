@@ -41,17 +41,16 @@ app.jinja_env.filters['rel_datetimeformat'] = template_filters.datetimeformat
 # Initialize translations
 app.jinja_env.globals['gettext'] = gettext
 app.jinja_env.globals['ngettext'] = ngettext
-app.default_journalist_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 babel = Babel(app)
 
 
 @babel.localeselector
 def get_locale():
     locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
-    if locale and locale in getattr(config, 'LOCALES', [app.default_journalist_locale]):
+    if locale and locale in getattr(config, 'LOCALES', ['en_US']):
         return locale
     else:
-        return app.default_journalist_locale
+        return 'en_US'
 
 
 @app.teardown_appcontext
@@ -93,7 +92,7 @@ def setup_g():
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']
     except AttributeError:
-        session['locale'] = app.default_journalist_locale
+        session['locale'] = 'en_US'
     # Save the resolved locale in g for templates
     g.resolved_locale = get_locale()
     g.locales = getattr(config, 'LOCALES', None)

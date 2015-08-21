@@ -53,18 +53,16 @@ app.jinja_env.filters['nl2br'] = evalcontextfilter(template_filters.nl2br)
 # Initialize translations
 app.jinja_env.globals['gettext'] = gettext
 app.jinja_env.globals['ngettext'] = ngettext
-app.source_default_locale = getattr(config, 'DEFAULT_SOURCE_LOCALE', 'en_US')
-app.journalist_default_locale = getattr(config, 'DEFAULT_JOURNALIST_LOCALE', 'en_US')
 babel = Babel(app)
 
 
 @babel.localeselector
 def get_locale():
     locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
-    if locale and locale in getattr(config, 'LOCALES', [app.source_default_locale]):
+    if locale and locale in getattr(config, 'LOCALES', ['en_US']):
         return locale
     else:
-        return app.source_default_locale
+        return 'en_US'
 
 
 @app.teardown_appcontext
@@ -114,7 +112,7 @@ def setup_g():
             elif len(locale) == 0 and 'locale' in session:
                 del session['locale']
     except AttributeError:
-        session['locale'] = app.source_default_locale
+        session['locale'] = 'en_US'
     # Save the resolved locale in g for templates
     g.resolved_locale = get_locale()
     g.locales = getattr(config, 'LOCALES', None)
@@ -159,7 +157,7 @@ def index():
 def generate_unique_codename(num_words):
     """Generate random codenames until we get an unused one"""
     while True:
-        codename = crypto_util.genrandomid(get_locale(), num_words)
+        codename = crypto_util.genrandomid(num_words)
 
         # The maximum length of a word in the wordlist is 6 letters and the
         # maximum codename length is 10 words, so it is currently impossible to
@@ -207,7 +205,7 @@ def generate():
 def create():
     sid = crypto_util.hash_codename(session['codename'])
 
-    source = Source(sid, crypto_util.display_id(journalist_default_locale))
+    source = Source(sid, crypto_util.display_id())
     db_session.add(source)
     try:
         db_session.commit()

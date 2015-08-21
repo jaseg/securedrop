@@ -37,8 +37,7 @@ if os.environ.get('SECUREDROP_ENV') == 'test':
 if config.DATABASE_ENGINE == "sqlite":
     engine = create_engine(
         config.DATABASE_ENGINE + ":///" +
-        config.DATABASE_FILE,
-        encoding='utf-8'
+        config.DATABASE_FILE
     )
 else:
     engine = create_engine(
@@ -48,8 +47,6 @@ else:
         config.DATABASE_HOST + '/' +
         config.DATABASE_NAME, echo=False
     )
-
-engine.raw_connection().connection.text_factory = unicode
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,

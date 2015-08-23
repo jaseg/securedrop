@@ -6,6 +6,7 @@ import os
 import select
 import shutil
 import subprocess
+from subprocess import CalledProcessError
 import unittest
 import readline  # makes the add_admin prompt kick ass
 from getpass import getpass
@@ -70,7 +71,7 @@ def _stop_test_rqworker():
     os.kill(get_pid_from_pidfile(TEST_WORKER_PIDFILE), signal.SIGTERM)
 
 
-def test(argv):
+def test():
     """
     Runs the test suite
     """
@@ -83,7 +84,7 @@ def test(argv):
     sys.exit(test_rc)
 
 
-def test_unit(argv):
+def test_unit():
     """
     Runs the unit tests.
     """
@@ -95,7 +96,7 @@ def test_unit(argv):
     sys.exit(test_rc)
 
 
-def reset(argv):
+def reset():
     """
     Clears the SecureDrop development application's state, restoring it to the
     way it was immediately after running `setup_dev.sh`. This command:
@@ -120,7 +121,7 @@ def reset(argv):
         shutil.rmtree(os.path.join(config.STORE_DIR, source_dir))
 
 
-def add_admin(argv):
+def add_admin():
     while True:
         username = raw_input("Username: ")
         if Journalist.query.filter_by(username=username).first():
@@ -185,7 +186,7 @@ def add_admin(argv):
             print
 
 
-def clean_tmp(argv):
+def clean_tmp():
     """Cleanup the SecureDrop temp directory. This is intended to be run as an
     automated cron job. We skip files that are currently in use to avoid
     deleting files that are currently being downloaded."""
@@ -220,55 +221,65 @@ def clean_tmp(argv):
             os.remove(path)
 
 
-def add_translations(argv):
-    for arg in argv:
-        init = babel.init_catalog(Distribution())
-        init.initialize_options()
-
-        init.input_file = BABEL_MESSAGES_FILE
-        init.locale = arg
-        init.output_dir = BABEL_TRANSLATIONS_DIR
-        init.no_wrap = True
-
-        init.finalize_options()
-        init.run()
-
-
-def update_translations(argv):
-    extract = babel.extract_messages(Distribution())
-    extract.initialize_options()
-
-    extract.input_dirs = '., source_templates, journalist_templates'
-    extract.mapping_file = './babel.cfg'
-    extract.output_file = BABEL_MESSAGES_FILE
-    extract.no_wrap = True
-
-    extract.finalize_options()
-    extract.run()
-
-    update = babel.update_catalog(Distribution())
-    update.initialize_options()
-
-    update.locale = 'en'
-    update.ignore_obsolete = True
-    update.input_file = BABEL_MESSAGES_FILE
-    update.no_wrap = True
-    update.output_dir = BABEL_TRANSLATIONS_DIR
-    update.output_file = BABEL_MESSAGES_FILE
-
-    update.finalize_options()
-    update.run()
+def add_translations():
+    cmd = [
+        'pybabel',
+        'init',
+        '-i', BABEL_MESSAGES_FILE,
+        '-d', BABEL_TRANSLATIONS_DIR,
+        '-l', sys.argv[3],
+        '--no-wrap',
+    ]
+    try:
+        subprocess.check_output(cmd)
+    except CalledProcessError as e:
+        print e.output
+        sys.exit(e.returncode)
 
 
-def compile_translations(argv):
-    catalog = babel.compile_catalog(Distribution())
-    catalog.initialize_options()
+def update_translations():
+    cmd = [
+        'pybabel',
+        'extract',
+        '-F', './babel.cfg',
+        '-o', BABEL_MESSAGES_FILE,
+        '--no-wrap',
+        '--project=SecureDrop',
+        '.,source_templates,journalist_templates'
+    ]
+    try:
+        subprocess.check_output(cmd)
+    except CalledProcessError as e:
+        print e.output
+        sys.exit(e.returncode)
 
-    catalog.directory = BABEL_TRANSLATIONS_DIR
+    cmd = [
+        'pybabel',
+        'update',
+        '-i', BABEL_MESSAGES_FILE,
+        '-d', BABEL_TRANSLATIONS_DIR,
+        '-o', BABEL_MESSAGES_FILE,
+        '--no-wrap',
+        '--ignore-obsolete',
+    ]
+    try:
+        subprocess.check_output(cmd)
+    except CalledProcessError as e:
+        print e.output
+        sys.exit(e.returncode)
 
-    catalog.finalize_options()
-    catalog.run()
 
+def compile_translations():
+    cmd = [
+        'pybabel',
+        'compile',
+        '-d', BABEL_TRANSLATIONS_DIR,
+    ]
+    try:
+        subprocess.check_output(cmd)
+    except CalledProcessError as e:
+        print e.output
+        sys.exit(e.returncode)
 
 def main():
     valid_cmds = [
@@ -288,14 +299,9 @@ def main():
         sys.exit(1)
 
     cmd = sys.argv[1]
-    args = sys.argv[2:]
 
     try:
-        if cmd == 'run':
-            run()  # TypeError when passed arguments
-        else:
-            # TODO figure out how to print err messages
-            getattr(sys.modules[__name__], cmd)(args)
+        getattr(sys.modules[__name__], cmd)()
     except KeyboardInterrupt:
         print  # So our prompt appears on a nice new line
 

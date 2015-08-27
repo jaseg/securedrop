@@ -15,7 +15,7 @@ msgstr ""
 
 #: journalist.py:128
 msgid "You must be an administrator to access that page"
-msgstr "Sie müssen ein Administrator auf die Seite zugreifen"
+msgstr "Sie müssen ein Administrator sein, um auf diese Seite zugreifen zu können"
 
 #: journalist.py:144
 msgid "Login failed."
@@ -27,11 +27,11 @@ msgstr "Bitte warten Sie mindestens 60 Sekunden, bevor Sie sich erneut anmelden.
 
 #: journalist.py:154
 msgid "Please wait for a new two-factor token before logging in again."
-msgstr "Bitte warten Sie, für eine neue Zwei-Faktor-Token vor der Anmeldung noch einmal."
+msgstr "Bitte warten Sie auf ein neues Zwei-Faktor-Token, bevor Sie sich erneut anmelden."
 
 #: journalist.py:196
 msgid "Missing username"
-msgstr "Fehlende Benutzername"
+msgstr "Fehlender Benutzername"
 
 #: journalist.py:202 journalist.py:294
 msgid "Passwords didn't match"
@@ -47,7 +47,7 @@ msgstr "Dieser Benutzername ist schon vergeben"
 
 #: journalist.py:228
 msgid "An error occurred saving this user to the database"
-msgstr "Beim Speichern diesen Benutzer der Datenbank ist ein Fehler aufgetreten."
+msgstr "Beim Speichern dieses Benutzers in der Datenbank ist ein Fehler aufgetreten."
 
 #: journalist.py:248
 msgid "Two factor token successfully verified for user {username}!"
@@ -55,7 +55,7 @@ msgstr "Zwei-Faktor-Token erfolgreich für den Benutzer {username} verifiziert!"
 
 #: journalist.py:253
 msgid "Two factor token failed to verify"
-msgstr "Das Zwei-Faktor-Token konnte nicht verifizieren."
+msgstr "Das Zwei-Faktor-Token konnte nicht verifiziert werden"
 
 #: journalist.py:315
 msgid "An unknown error occurred, please inform your administrator"
@@ -67,43 +67,43 @@ msgstr "{source_journalist_designation}s wird gelöscht"
 
 #: journalist.py:459 journalist.py:545
 msgid "No collections selected to delete!"
-msgstr "Keine Sammlungen sind zum Löschen ausgewählt."
+msgstr "Es sind keine Sammlungen zum Löschen ausgewählt."
 
 #: journalist.py:464
 msgid "{num} collection deleted"
 msgid_plural "{num} collections deleted"
-msgstr[0] "{num} Sammlung wird gelöscht"
-msgstr[1] "{num} Sammlungen werden gelöscht"
+msgstr[0] "{num} Sammlung gelöscht"
+msgstr[1] "{num} Sammlungen gelöscht"
 
 #: journalist.py:497
 msgid "Thanks! Your reply has been stored."
-msgstr "Vielen Dank! Ihre Antwort wird gespeichert."
+msgstr "Vielen Dank! Ihre Antwort wurde gespeichert."
 
 #: journalist.py:514
 msgid "The source '{original_journalist_designation}' has been renamed to '{source_journalist_designation}'"
-msgstr "Die Quelle '{original_journalist_designation}' wird zu {source_journalist_designation} unbennant"
+msgstr "Die Quelle '{original_journalist_designation}' wurde nach {source_journalist_designation} umbennant"
 
 #: journalist.py:543
 msgid "No collections selected to download!"
-msgstr "Keine Kollektionen werden ausgewählt zum heruntergeladen!"
+msgstr "Es sind keine Sammlungen zum Download ausgewählt!"
 
 #: journalist.py:572
 msgid "Submission deleted."
 msgid_plural "Submissions deleted."
-msgstr[0] "Einreichung wird gelöscht."
-msgstr[1] "Einreichungen werden gelöscht."
+msgstr[0] "Einreichung gelöscht."
+msgstr[1] "Einreichungen gelöscht."
 
 #: source.py:148
 msgid "<strong>WARNING:</strong> You appear to be using Tor2Web. This <strong>does not</strong> provide anonymity. <a href=\"/tor2web-warning\">Why is this dangerous?</a>"
-msgstr "<strong>ACHTUNG:</strong> Es scheint wie Sie Tor2Web benutzen. Dies stellt <strong>keine Anonymität.</strong> <a href=\"/tor2web-warning\">Warum ist das gefährlich?</a>"
+msgstr "<strong>ACHTUNG:</strong> Es scheint, dass Sie Tor2Web benutzen. Das garantiert <strong>keine Anonymität.</strong> <a href=\"/tor2web-warning\">Warum ist das gefährlich?</a>"
 
 #: source.py:306
 msgid "You must enter a message or choose a file to submit."
-msgstr "Sie müssen eine Mitteilung geben, oder wählen Sie eine Datei zu unterbreiten."
+msgstr "Sie müssen eine Nachricht eingeben oder eine Datei zum Einreichen auswählen."
 
 #: source.py:333
 msgid "Thanks for submitting something to SecureDrop! Please check back later for replies."
-msgstr "Vielen dank für Ihre SecureDrop Einrichung! Bitte versuchen Sie es später für die Antworten."
+msgstr "Vielen Dank, dass sie etwas bei SecureDrop eingereicht haben! Bitte sehen Sie später, ob es Antworten gab."
 
 #: source.py:337
 msgid "Thanks! We received your message."
@@ -115,11 +115,11 @@ msgstr "Danke! Wir haben Ihr Dokument \"{file_name}\" erhalten."
 
 #: source.py:374
 msgid "Reply deleted"
-msgstr "Antwort wirt gelöscht"
+msgstr "Antwort gelöscht"
 
 #: source.py:407
 msgid "Sorry, that is not a recognized codename."
-msgstr "Leider, ist das kein erkannte Deckname."
+msgstr "Es tut uns leid, das ist kein erkannte Deckname."
 
 #: template_filters.py:23
 msgid "{seconds} seconds ago"
@@ -151,7 +151,7 @@ msgstr "vor {days} Tagen"
 
 #: journalist_templates/admin.html:3
 msgid "Admin Interface"
-msgstr "Admin-Schnittstelle"
+msgstr "Admin-Interface"
 
 #: journalist_templates/admin.html:6
 #: journalist_templates/admin_add_user.html:21
@@ -177,12 +177,12 @@ msgstr "Erstellt"
 
 #: journalist_templates/admin.html:20
 msgid "Last login"
-msgstr "Letzte Anmeldung"
+msgstr "Letzter Login"
 
 #: journalist_templates/admin.html:25
 #: journalist_templates/admin_edit_user.html:3
 msgid "Edit user '{username}'"
-msgstr "Benuzter '{username}' ändern"
+msgstr "Benuzter '{username}' bearbeiten"
 
 #: journalist_templates/admin.html:26
 msgid "Delete user '{username}'"
@@ -190,38 +190,38 @@ msgstr "Benutzer '{username}' löschen"
 
 #: journalist_templates/admin.html:38
 msgid "No users to display"
-msgstr "Keine Benutzer zu anzeigen"
+msgstr "Keine Benutzer anzuzeigen"
 
 #: journalist_templates/admin_add_user.html:4
 #: journalist_templates/admin_edit_user.html:4
 msgid "Back to admin interface"
-msgstr "Zurück nach Admin-Schnittstelle"
+msgstr "Zurück zum Admin-Interface"
 
 #: journalist_templates/admin_add_user.html:10
 #: journalist_templates/login.html:9
 msgid "Password"
-msgstr "Kennwort"
+msgstr "Passwort"
 
 #: journalist_templates/admin_add_user.html:11
 msgid "Password (again)"
-msgstr "Kennwort (wieder)"
+msgstr "Passwortwiederholung"
 
 #: journalist_templates/admin_add_user.html:14
 msgid "Is Administrator"
-msgstr "Ein Administrator ist"
+msgstr "Ist Administrator"
 
 #: journalist_templates/admin_add_user.html:18
 msgid "I'm using a Yubikey"
-msgstr "Ich benutze ein Yubikey"
+msgstr "Ich benutze einen Yubikey"
 
 #: journalist_templates/admin_add_user.html:19
 #: journalist_templates/admin_edit_hotp_secret.html:8
 msgid "HOTP Secret"
-msgstr "HOTP Geheimnis"
+msgstr "HOTP-Secret"
 
 #: journalist_templates/admin_edit_hotp_secret.html:7
 msgid "Change Secret"
-msgstr "Geheimnis ändern"
+msgstr "Secret ändern"
 
 #: journalist_templates/admin_edit_hotp_secret.html:10
 #: source_templates/generate.html:42 source_templates/login.html:11
@@ -234,11 +234,11 @@ msgstr "Benutzername ändern"
 
 #: journalist_templates/admin_edit_user.html:13
 msgid "Change password"
-msgstr "Kennwort ändern"
+msgstr "Passwort ändern"
 
 #: journalist_templates/admin_edit_user.html:15
 msgid "Leave blank for no change"
-msgstr "Leer lassen für keine Änderung"
+msgstr "Leer lassen, um nichts zu ändern"
 
 #: journalist_templates/admin_edit_user.html:18
 msgid "Change password (confirm)"
@@ -254,7 +254,7 @@ msgstr "Zwei-Faktor-Authentifizierung zurücksetzen"
 
 #: journalist_templates/admin_edit_user.html:31
 msgid "If a user's two factor authentication credentials have been lost or compromised, you can reset them here. <em>If you do this, make sure the user is present and ready to set up their device with the new two factor credentials. Otherwise, they will be locked out of their account.</em>"
-msgstr "Wenn zwei Faktor-Authentifizierung Anmeldeinformationen eines Benutzers verloren gegangen sind oder beeinträchtigt, können Sie sie hier zurücksetzen. <e,>Wenn Sie dies tun, stellen Sie sicher, dass der Benutzer anwesend und bereit, mit den neuen Zwei-Faktor-Anmeldeinformationen für die Errichtung ihrer Gerät. Andernfalls werden sie von ihrem Konto gesperrt werden.</em>"
+msgstr "Wenn die Zwei-Faktor-Authentifizierungsinformationen eines Benutzers verloren gegangen sind oder kompromittiert wurden, können Sie diese hier zurücksetzen. <e,>Wenn Sie das tun, stellen Sie sicher, dass der Benutzer anwesend ist und bereit ist, sein Gerät mit den neuen Informationen einzurichten. Andernfalls wird der Benutzer aus seinem Konto ausgesperrt.</em>"
 
 #: journalist_templates/admin_edit_user.html:35
 msgid "Reset two factor authentication (Google Authenticator)"
@@ -270,8 +270,7 @@ msgstr "Google-Authenicator aktivieren"
 
 #: journalist_templates/admin_new_user_two_factor.html:5
 msgid "You're almost done! To finish adding this new user, have them follow the instructions below to set up two factor authentication with Google Authenticator. Once they've added an entry for this account in the app, have them enter one of the 6-digit codes from the app to confirm that two factor authentication is set up correctly."
-msgstr "Sie sind fast fertig. Um das Hinzufügen dieser neuen Benutzer, lassen Sie ihn/sie Sie die nachstehenden Anweisungen befolgen, Zwie-Faktor 
-Authentifizierung mit Google Authenticator einzurichten. Sobald sie einen Eintrag für dieses Konto in der App hinzugefügt haben, lassen Sie ihn/sie geben einen 6-stelligen Codes aus der App, zu bestätigen, dass zwei Faktoren-Authentifizierung korrekt konfiguriert wurde."
+msgstr "Sie sind fast fertig! Lassen Sie den Benuter die nachstehenden Anweisungen befolgen, um Zwei-Faktor-Authentifizierung mit Google Authenticator einzurichten und die Erstellung des Kontos abzuschließen. Fügen sie in der App einen Eintrag für dieses Konto hinzu und lassen Sie den Nutzer eine der 6-ziffigen Zahlen aus der App hier eingeben, um die Konfiguration der Zwei-Faktor-Authentifizierung abzuschließen."
 
 #: journalist_templates/admin_new_user_two_factor.html:7
 msgid "Install Google Authenticator on your phone"
@@ -283,31 +282,31 @@ msgstr "Öffnen Sie die App"
 
 #: journalist_templates/admin_new_user_two_factor.html:9
 msgid "Tap menu, then tap \"Set up account\", then tap \"Scan a barcode\""
-msgstr "Tippen Sie auf Menü, dann tippen Sie auf \"Konto einrichten\", dann tippen Sie auf \"Barcode scannen\""
+msgstr "Tippen Sie auf Menü, tippen Sie anscließend auf \"Konto einrichten\", dann \"Barcode scannen\""
 
 #: journalist_templates/admin_new_user_two_factor.html:10
 msgid "Your phone will now be in \"scanning\" mode. When you are in this mode, scan the barcode below:"
-msgstr "Ihr Handy würde in \"Scanne Modus\". Wann Sie in das Modus sind, scannen Sie der nachstehende Barcode:"
+msgstr "Ihr Handy geht nun in den \"Scan-Modus\". Scannen Sie dort den folgenden Barcode:"
 
 #: journalist_templates/admin_new_user_two_factor.html:13
 msgid "Can't scan the barcode? Enter the following code manually:"
-msgstr "Nicht der Barcode scannen können? Geben Sie der folgende Code ein:"
+msgstr "Geben Sie die folgende Nummer ein, falls sie den Barcode nicht scannen können:"
 
 #: journalist_templates/admin_new_user_two_factor.html:14
 msgid "Once you have scanned the barcode, enter the 6-digit code below:"
-msgstr "Sobald Sie den Barcode gescannt haben, geben Sie die 6-stellige Code unten:"
+msgstr "Geben Sie den folgenden sechsstelligen Code ein, sobald Sie den Barcode gescannt haben:"
 
 #: journalist_templates/admin_new_user_two_factor.html:16
 msgid "Enable Yubikey (OATH-HOTP)"
-msgstr "Aktivieren Sie Yubikey (OATH-HOTP)"
+msgstr "Yubikey aktivieren (OATH-HOTP)"
 
 #: journalist_templates/admin_new_user_two_factor.html:17
 msgid "Once you have configured your Yubikey, enter the 6-digit code below:"
-msgstr "Sobald Sie Ihre Yubikey konfiguriert haben, geben Sie die 6-stellige Code unten:"
+msgstr "Geben sie den folgenden sechsstelligen Code ein, sobald Sie Ihren Yubikey konfiguriert haben:"
 
 #: journalist_templates/admin_new_user_two_factor.html:21
 msgid "Verification code"
-msgstr "Bestätigungs-Code"
+msgstr "Bestätigungscode"
 
 #: journalist_templates/admin_new_user_two_factor.html:23
 #: journalist_templates/col.html:63 source_templates/lookup.html:31
@@ -324,23 +323,23 @@ msgstr "Abmelden"
 
 #: journalist_templates/base.html:33
 msgid "Powered by <br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
-msgstr "Bereitgestellt von <br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
+msgstr "Powered by <br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
 
 #: journalist_templates/base.html:47
 msgid "Powered by <em>SecureDrop {version}</em>."
-msgstr "Bereitgestellt von <em>SecureDrop {version}</em>."
+msgstr "Powered by <em>SecureDrop {version}</em>."
 
 #: journalist_templates/col.html:13
 msgid "Generate a new random codename for this source. We recommend doing this if the first random codename is difficult to say or remember. You can generate new random codenames as many times as you like."
-msgstr "Generieren Sie ein neues Deckname für diese Quelle. Wir empfehlen, dies zu tun, wenn die erste Deckname ist schwer zu sagen oder zu erinnern. Sie können neue zufällige Deckname so oft zu erzeugen, wie Sie möchten."
+msgstr "Einen neuen zufälligen Deckname für diese Quelle generieren. Wir empfehlen das, falls der erste Deckname schwer auszusprechen oder zu merken ist. Sie beliebig viele Decknamen erzeugen."
 
 #: journalist_templates/col.html:13
 msgid "Change codename"
-msgstr "Deckname ändern"
+msgstr "Decknamen ändern"
 
 #: journalist_templates/col.html:18
 msgid "The documents are stored encrypted for security. To read them, you will need to decrypt them using GPG."
-msgstr "Die Dokumente werden gespeichert aus Sicherheitsgründen verschlüsselt. Um sie zu lesen, werden Sie brauchen, um sie mit GPG entschlüsseln."
+msgstr "Die Dokumente werden aus Sicherheitsgründen verschlüsselt gespeichert. Damit Sie sie lesen können, müssen Sie sie mit GPG entschlüsseln."
 
 #: journalist_templates/col.html:22
 msgid "Download selected"
@@ -352,7 +351,7 @@ msgstr "Ausgewählte löschen"
 
 #: journalist_templates/col.html:36
 msgid "Uploaded Document"
-msgstr "Hochgeladte Datei"
+msgstr "Hochgeladene Datei"
 
 #: journalist_templates/col.html:38
 msgid "Reply"
@@ -364,11 +363,11 @@ msgstr "Nachricht"
 
 #: journalist_templates/col.html:50
 msgid "No documents to display."
-msgstr "Keine Datein zu anzeigen"
+msgstr "Keine Dateien anzuzeigen"
 
 #: journalist_templates/col.html:57
 msgid "You can write a secure reply to the person who submitted these documents:"
-msgstr "Sie können eine sichere Antwort auf die Person, die diese Dokumente vorgelegt schreiben:"
+msgstr "Sie können der Person, die diese Dokumente eingereicht hat sicher eine Antwort schreiben:"
 
 #: journalist_templates/col.html:66
 msgid "You've flagged this source for reply."
@@ -376,19 +375,19 @@ msgstr "Sie haben diese Quelle für eine Antwort markiert."
 
 #: journalist_templates/col.html:67
 msgid "An encryption key will be generated for the source the next time they log in, after which you will be able to reply to the source here."
-msgstr "Ein Schlüssel wird für die Quelle der nächsten Anmeldung in, nach dem Sie in der Lage, an die Quelle eine Antwort zu erstellen generiert werden."
+msgstr "Das nächste mal, wenn sich die Quelle einloggt wird für sie ein Schlüssel generiert werden. Anschließend können Sie ihr hier antworten."
 
 #: journalist_templates/col.html:69
 msgid "Click below if you would like to write a reply to this source."
-msgstr "Klicken Sie unten, wenn Sie möchten, um eine Antwort auf diese Quelle zu schreiben."
+msgstr "Klicken Sie hier, wenn Sie dieser Quelle eine Antwort schreiben möchten."
 
 #: journalist_templates/col.html:73
 msgid "Flag this source for reply"
-msgstr "Diese Quelle für eine Antowort markieren"
+msgstr "Diese Quelle für eine Antwort markieren"
 
 #: journalist_templates/col.html:78
 msgid "Click below to delete this source's collection. <em>Warning: If you do this, the files seen here will be unrecoverable and the source will no longer be able to login using their previous codename.</em>"
-msgstr "Klicken Sie unten, zur Sammlung dieser Quelle zu löschen. <em>Warnung: Wenn Sie dies tun, werden die Dateien nicht wiederhergestellt werden hier zu sehen, und die Quelle wird nicht mehr in der Lage, hier mit ihrer früheren Deckename sein.</em>"
+msgstr "Klicken Sie hier, um die Sammlung dieser Quelle zu löschen. <em>Warnung: Die Dateien können anschließend nicht wiederhergestellt werden und die Quelle kann sich nicht mehr mit ihrem früheren Deckenamen anmelden.</em>"
 
 #: journalist_templates/col.html:84
 msgid "Delete collection"
@@ -396,17 +395,17 @@ msgstr "Sammlung löschen"
 
 #: journalist_templates/delete.html:5
 msgid "The following file has been selected for <strong>permanent deletion</strong>:"
-msgstr[0] "Die folgende Datei wurde zum <strong>endgültigen Löschen</strong> ausgewählt:"
-msgstr[1] "Die folgenden Datein wurde zum <strong>endgültigen Löschen</strong> ausgewählt:"
 msgid_plural "The following {files} files has been selected for <strong>permanent deletion</strong>:"
+msgstr[0] "Die folgende Datei wurde zum <strong>endgültigen Löschen</strong> ausgewählt:"
+msgstr[1] "Die folgenden Dateien wurden zum <strong>endgültigen Löschen</strong> ausgewählt:"
 
 #: journalist_templates/delete.html:20
 msgid "Permanently delete files"
-msgstr "Endgültigen Dateien löschen"
+msgstr "Dateien endgültig löschen"
 
 #: journalist_templates/delete.html:23
 msgid "Return to the list of documents for {source_journalist_designation}..."
-msgstr "Zurück zu der Liste der Dokumente für {source_journalist_designation}..."
+msgstr "Zurück zur Dokumentenliste für {source_journalist_designation}..."
 
 #: journalist_templates/flag.html:5
 msgid "Thanks!"
@@ -414,11 +413,11 @@ msgstr "Danke!"
 
 #: journalist_templates/flag.html:8
 msgid "SecureDrop will generate a secure encryption key for this source the next time that they log in. Once the key has been generated, a reply box will appear under their collection of documents. You can use this box to write encrypted replies to them."
-msgstr "Securedrop wird eine sichere Verschlüsselungsschlüssel für diese Quelle zu erzeugen, das nächste Mal, dass er/sie sich anmelden. Sobald der Schlüssel generiert wurde, wird eine Antwort-Box unter ihrer Sammlung von Dokumenten angezeigt. Sie können dieses Feld verwenden, um verschlüsselte Antworten auf ihm/sie zu schreiben."
+msgstr "Securedrop wird für diese Quelle einen sichere Schlüssel für die Verschlüsselung generieren, wenn sie sich das nächste Mal anmeldet. Sobald der Schlüssel generiert wurde, unter ihrer Dokumentensammlung ein Antowortfeld angezeigt werden. Über dieses Feld können Sie der Quelle verschlüsselte Antworten schreiben."
 
 #: journalist_templates/flag.html:10
 msgid "Continue to the list of documents for {codename}..."
-msgstr "Weiter zur Liste des Dokumente für {codname}..."
+msgstr "Weiter zur Dokumentenliste von {codname}..."
 
 #: journalist_templates/index.html:4
 msgid "Sources"
@@ -426,7 +425,7 @@ msgstr "Quellen"
 
 #: journalist_templates/index.html:10 journalist_templates/js-strings.html:5
 msgid "select all"
-msgstr "alle wählen"
+msgstr "alle auswählen"
 
 #: journalist_templates/index.html:10 journalist_templates/js-strings.html:6
 msgid "select none"
@@ -438,7 +437,7 @@ msgstr "Ausgewählte markieren"
 
 #: journalist_templates/index.html:13
 msgid "Un-star Selected"
-msgstr "Ausgewählte unmarkieren"
+msgstr "Markierung ausgewählter zurücksetzen"
 
 #: journalist_templates/index.html:29 journalist_templates/index.html:55
 msgid "docs {doc_num}"
@@ -458,35 +457,35 @@ msgstr "{unread} ungelesen"
 
 #: journalist_templates/index.html:70
 msgid "No documents have been submitted!"
-msgstr "Es war nichts eingerichten"
+msgstr "Es wurden keine Dokumente eingereicht!"
 
 #: journalist_templates/js-strings.html:4
 msgid "filter by codename"
-msgstr "Deckname filtern"
+msgstr "Nach Deckname filtern"
 
 #: journalist_templates/js-strings.html:7
 msgid "Are you sure you want to delete this collection?"
-msgstr "Sind Sie sicher, Sie wollen die Sammlung wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie diese Sammlung löschen wollen?"
 
 #: journalist_templates/js-strings.html:8
 msgid "Are you sure you want to delete the {size} selected collections?"
-msgstr "Sind Sie sicher, Sie wollen die {size} Sammlungen wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie die {size} markierten Sammlungen löschen wollen?"
 
 #: journalist_templates/js-strings.html:9
 msgid "Are you sure you want to delete the {size} selected submissions?"
-msgstr "Sind Sie sicher, Sie wollen die {size} Einreichungen wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie die {size} markierten Sammlungen löschen wollen?"
 
 #: journalist_templates/js-strings.html:10
 msgid "Are you sure you want to delete the user {username}?"
-msgstr "Sind Sie sicher, Sie wollen der Benutzer {username} wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie den Benutzer {username} löschen wollen?"
 
 #: journalist_templates/js-strings.html:11
 msgid "Are you sure you want to reset two factor authentication for {username}?"
-msgstr "Sind Sie sicher, Sie wollen Zwei-Faktor-Authentifizierung für {username} zurückzusetzen?"
+msgstr "Sind Sie sicher, dass Sie die Zwei-Faktor-Authentifizierung für {username} zurücksetzen wollen?"
 
 #: journalist_templates/login.html:4
 msgid "Login to access the journalist interface"
-msgstr "Melden Sie an, zum Journalist Schnittstelle"
+msgstr "Melden Sie sich, um auf das Journalisten-Interface zuzugreifen"
 
 #: journalist_templates/login.html:10
 msgid "Two-factor Code"
@@ -498,15 +497,15 @@ msgstr "Anmelden"
 
 #: source_templates/base.html:5 source_templates/index.html:4
 msgid "Protecting Journalists and Sources"
-msgstr "Schütz für Journalisten und Quellen"
+msgstr "Schutz für Journalisten und Quellen"
 
 #: source_templates/base.html:21
 msgid "Powered by<br/><img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
-msgstr "Bereitgestellt von<br/><img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
+msgstr "Powered by<br/><img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
 
 #: source_templates/base.html:36 source_templates/index.html:49
 msgid "Like all software, SecureDrop may contain security bugs. Use at your own risk. Powered by SecureDrop {version}."
-msgstr "Wie alle Software, SecureDrop könnte Sicherheitslücken enthalten. Benutzung auf eigene Gefahr. Bereitgestellt von SecureDrop {version}."
+msgstr "Wie jede Software kann SecureDrop Sicherheitslücken enthalten. Benutzung auf eigene Gefahr. Powered by SecureDrop {version}."
 
 #: source_templates/error.html:5
 msgid "Server error"
@@ -514,122 +513,121 @@ msgstr "Serverfehler"
 
 #: source_templates/error.html:7
 msgid "Sorry, the website encountered an error and was unable to complete your request."
-msgstr "Leider ist die Website ein Fehler aufgetreten und war die Anfrage konnte nicht vollenden."
+msgstr "Leider ist in der Website ein Fehler aufgetreten. Ihre Anfrage konnte nicht vollendet werden."
 
 #: source_templates/error.html:9 source_templates/notfound.html:9
 msgid "Look up a codename..."
-msgstr "Eine Deckname nachschlagen..."
+msgstr "Decknamen nachschlagen..."
 
 #: source_templates/generate.html:4
 msgid "Remember this codename and keep it secret"
-msgstr "Denken Sie daran, diesen Deckname und es geheim halten."
+msgstr "Merken Sie sich diesen Deckname und halten Sie ihn geheim."
 
 #: source_templates/generate.html:5
 msgid "To protect your identity, we're assigning you a unique codename."
-msgstr "Um Ihre Identität zu schützen, weisen wir Ihnen ein einzigartiges Deckname."
+msgstr "Wir weisen Ihnen zum Schutz Ihrer Identität einen eindeutigen Decknamen zu."
 
 #: source_templates/generate.html:16
 msgid "{n} word"
 msgid_plural "{n} words"
 msgstr[0] "{n} Wort"
-msgstr[1] "{n} Worte"
+msgstr[1] "{n} Wörter"
 
 #: source_templates/generate.html:34
 msgid "After you submit documents and messages, you can return to this SecureDrop site later to read replies from journalists and submit more information. <strong>You will need this codename to log in.</strong> This is the only way we can communicate back to you."
-msgstr "Nachdem Sie Dokumente und Nachrichten einreichen, können Sie auf diese SecureDrop Website später zurück, Antworten von Journalisten zu lesen, und senden Sie weitere Informationen."
+msgstr "Sie können zu dieser SecureDrop-Seite zurückkehren, nachdem Sie Dokumente und Nachrichten eingereicht haben, um Antworten von Journalisten zu lesen und weitere Informationen einzureichen. <strong> Sie brauchen zur Anmeldung diesen Decknamen.</strong> Dieser Deckname ist unsere einzige Möglichkeit, mit Ihnen zu Kommunizieren."
 
 #: source_templates/generate.html:36
 msgid "The best way to protect your codename is to memorize it. If you cannot memorize it right away, we recommend writing it down and keeping it in a safe place at first, and gradually working to memorize it over time. Once you have memorized it, you should destroy the written copy."
-msgstr "Der beste Weg, Ihre Codenamen zu schützen, ist es zu merken. Wenn Sie sich nicht merken es sofort, empfehlen wir es aufschreiben und halten Sie sie an einem sicheren Ort auf den ersten, und nach und nach versuchen Sie es mit der Zeit merken."
+msgstr "Der beste Weg, ihren Decknamen zu schützen ist es, ihn sich zu merken. Wenn Sie ihn sich nicht sofort merken können, empfehlen wir Ihnen, ihn aufschreiben und vorübergehend an einem sicheren Ort aufzubewahren, um ihn sich nach und zu merken."
 
 #: source_templates/generate.html:43
 msgid "Already have a codename?"
-msgstr "Bereits ein Deckname haben?"
+msgstr "Haben Sie schon einen Decknamen?"
 
 #: source_templates/howto-disable-js.html:4
 msgid "Disable JavaScript to Protect Your Anonymity"
-msgstr "Deaktiviern Sie JavaScript Ihre Identität zu Schützen"
+msgstr "Deaktivieren Sie JavaScript, um Ihre Identität zu Schützen"
 
 #: source_templates/howto-disable-js.html:6
 msgid "JavaScript is a widely used programming language for creating interactive web pages. Unfortunately, JavaScript is also the most common source of security vulnerabilities in browsers. In August 2013, the FBI wrote malware that used a JavaScript exploit to de-anonymize Tor users (http://www.wired.com/threatlevel/2013/09/freedom-hosting-fbi). JavaScript exploits are also mentioned in documents describing the NSA's Egotistical Giraffe (http://www.theguardian.com/world/interactive/2013/oct/04/egotistical-giraffe-nsa-tor-document) program, which also has the goal of targeting and de-anonymizing Tor users."
-msgstr "JavaScript ist eine weit verbreitete Programmiersprache für die Erstellung interaktiver Webseiten. Leider ist JavaScript auch die häufigste Quelle von Sicherheitslücken in Browsern. Im August 2013, das FBI schrieb Malware, die eine JavaScript nutzen, um un-anonymisieren Tor-Benutzer verwendet (http://www.wired.com/threatlevel/2013/09/freedom-hosting-fbi). JavaScript-Exploits sind auch in Dokumente der NSA \"Egotistical Giraffe\" Programm (http://www.theguardian.com/world/interactive/2013/oct/04/egotistical-giraffe-nsa-tor-document), das auch das Ziel, Targeting und de-anonymisieren Tor-Benutzer beschreiben, erwähnt."
+msgstr "JavaScript ist eine weit verbreitete Programmiersprache zur Erstellung interaktiver Webseiten. Leider ist JavaScript auch die häufigste Ursache von Sicherheitslücken in Browsern. Im August 2013 hat das amerikanische FBI Schadsoftware geschrieben, die eine JavaScript-Lücke nutzte, um Tor-Benutzer zu deanonymisieren. (http://www.wired.com/threatlevel/2013/09/freedom-hosting-fbi). JavaScript-Exploits wurden auch in Dokumenten des \"Egotistical Giraffe\"-Programms der NSA erwähnt (http://www.theguardian.com/world/interactive/2013/oct/04/egotistical-giraffe-nsa-tor-document), das auch zum Ziel hatte, Tor-Benutzer anzugreifen und zu deanonymisieren."
 
 #: source_templates/howto-disable-js.html:8
 msgid "We encourage SecureDrop users to disable JavaScript to protect themselves from malware that would use it to attack their browser and potentially de-anonymize them. There are other ways to get hacked, but given the use of JavaScript-based attacks recently, we believe it is prudent to disable it at this time."
-msgstr "Wir empfehlen SecureDrop-Benutzern, JavaScript deaktivieren, zu sich vor Malware, die sie verwenden, um ihre Browser und möglicherweise de-anonymisieren sie angreifen zu schützen. Es gibt andere Wege, um gehackt, aber angesichts der Verwendung von JavaScript-basierte Angriffe vor kurzem, glauben wir, ist es ratsam, sie zu diesem Zeitpunkt zu deaktivieren."
+msgstr "Zum Schutz vor Malware empfehlen wir SecureDrop-Benutzern, JavaScript zu deaktivieren. Solche Malware kann den Browser angreifen und möglicherweise den Nutzer deanonymisieren. Es gibt noch andere Wege gehackt zu werden, im Angesicht der derzeitigen Verbreitung JavaScript-basierter Angriffe glauben wir aber, dass die Deaktivierung derzeit sinvoll ist.."
 
 #: source_templates/howto-disable-js.html:10
 msgid "The Tor Browser comes with an add-on called NoScript that can be used to completely disable JavaScript by default, and to only enable it for sites that you trust."
-msgstr "Der Tor-Browser kommt mit einem Add-On namens NoScript, die verwendet werden, um vollständig zu deaktivieren JavaScript standardmäßig, und nur für Websites, denen Sie vertrauen, aktivieren Sie sie."
+msgstr "Der Tor-Browser kommt mit einem Add-On namens NoScript, das verwendet werden, um JavaScript standardmäßig vollständig zu deaktivieren und nur für Websites, denen Sie vertrauen zu aktivieren."
 
 #: source_templates/howto-disable-js.html:12
 msgid "To disable JavaScript in Tor Browser, click the NoScript icon <img src="/static/i/no16.png"/> to the left of the address bar above and choose \"Forbid Scripts Globally (advised)\"."
-msgstr "JavaScript in Tor er zu deaktivieren, klicken Sie das NoScript-Symbol <img src="/static/i/no16.png"/> links neben der Adresseleiset oben, und wählen Sie \"Forbid Scripts Globally (advised)\"."
+msgstr "Um JavaScript in ihrem Tor-Browser zu deaktivieren, klicken Sie das NoScript-Symbol <img src="/static/i/no16.png"/> links neben der Adresseleiste oben, und wählen Sie \"Forbid Scripts Globally (advised)\"."
 
 #: source_templates/index.html:13
 msgid "<strong>We recommend disabling JavaScript to protect your anonymity:</strong> <a id=\"disable-js\" href=\"/howto-disable-js\">Learn how to disable it</a>, or ignore this warning to continue."
-msgstr "<strong>Wie empfehlen JavaScript deaktivieren, Ihre Anonymität zu schützen:</strong> <a id=\"disable-js\" href=\"/howto-disable-js\">Erfahren Sie, wie es zu tun</a>, oder ignorieren Sie diese Warnung, zu fortzufahren."
+msgstr "<strong>Wie empfehlen, JavaScript zu deaktivieren um ihre Anonymität zu schützen:</strong> <a id=\"disable-js\" href=\"/howto-disable-js\">Erfahren Sie, wie</a> oder ignorieren Sie diese Warnung um fortzufahren."
 
 #: source_templates/index.html:23
 msgid "Powered by<br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
-msgstr "Bereitgestellt von <br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
+msgstr "Powered by <br/> <img src=\"/static/i/securedrop_small.png\" alt=\"SecureDrop\">"
 
 #: source_templates/index.html:30
 msgid "Submit documents for the first time"
-msgstr "Dokumenten zum ersten Mal einreichen"
+msgstr "Zum ersten Mal Dokumente einreichen"
 
 #: source_templates/index.html:33
 msgid "If this is your first time submitting documents to journalists, start here."
-msgstr "Wenn dies das erste Mal ist die Vorlage von Dokumenten mit Journalisten, beginnen Sie hier."
+msgstr "Wenn das das erste Mal ist, dass Sie Journalisten Dokumente einreichen, starten Sie hier."
 
 #: source_templates/index.html:35
 msgid "Submit Documents"
-msgstr "Datein einreichten"
+msgstr "Dateien einreichen"
 
 #: source_templates/index.html:39
 msgid "Already submitted something?"
-msgstr "Bereits etwas eingereicht?"
+msgstr "Haben Sie bereits etwas eingereicht?"
 
 #: source_templates/index.html:42
 msgid "If you have already submitted documents in the past, log in here to check for responses."
-msgstr "Wenn Sie haben bereits Dokumente in der Vergangenheit eingereicht, melden Sie hier an, um Antworten zu überprüfen."
+msgstr "Wenn Sie vorher schon einmal Dokumente eingereicht haben, melden Sie sich hier an um nach Antworten zu sehen."
 
 #: source_templates/index.html:44
 msgid "Check for a response"
-msgstr "Für eine Antwort überprüfen"
+msgstr "Nach Antworten sehen"
 
 #: source_templates/index.html:58
 msgid "You appear to be using the Tor Browser. You can disable Javascript in 3 easy steps!"
-msgstr "Es scheint wie Sie der Tor Browser benutzen. Sie können Javascript in 3 einfach Schritte deaktivieren!"
+msgstr "Es scheint, dass Sie den Tor Browser benutzen. Sie können Javascript in 3 einfachen Schritte deaktivieren!"
 
 #: source_templates/index.html:60
 msgid "Click the <img src=\"static/i/no16.png\" alt=\"NoScript icon\" /> NoScript icon in the toolbar above"
-msgstr "Klicken Sie das <img src=\"static/i/no16.png\" alt=\"NoScript icon\" /> NoScript Symbol in der Symbolleiste oben"
+msgstr "Klicken Sie auf das <img src=\"static/i/no16.png\" alt=\"NoScript icon\" /> NoScript-Symbol in der Symbolleiste oben"
 
 #: source_templates/index.html:61
 msgid "Click <strong><img src=\"static/i/no16-global.png\" alt=\"Forbid Scripts Globally\" /> Forbid Scripts Globally (advised)</strong>"
-msgstr "Klicken Sie <strong><img src=\"static/i/no16-global.png\" alt=\"Forbid Scripts Globally\" /> Forbid Scripts Globally (advised)</strong>"
+msgstr "Klicken Sie auf <strong><img src=\"static/i/no16-global.png\" alt=\"Forbid Scripts Globally\" /> Forbid Scripts Globally (advised)</strong>"
 
 #: source_templates/index.html:62
 msgid "If the page does not refresh automatically, <a href=\"/\">click here</a> to refresh the page"
-msgstr "Wenn die Seite nicht automatisch aktualisieren, <a href=\"/\">klicken Sie heir</a> die Seite aktualisieren."
+msgstr "Wenn sich die Seite nicht automatisch neu lädt <a href=\"/\">klicken Sie hier</a>, um die Seite zu aktualisieren."
 
 #: source_templates/index.html:64
 msgid "Not using the Tor Browser Bundle?"
-msgstr "Nicht der Tor Browser Bundle benutzen?"
+msgstr "Kein Benutzer vom Tor Browser Bundle?"
 
 #: source_templates/login.html:4
 msgid "Login to check for responses"
-msgstr "Melden Sie an, für Antworten zu überprüfen."
+msgstr "Melden Sie sich an, um nach Antworten zu sehen."
 
 #: source_templates/login.html:10
 msgid "Enter your codename"
-msgstr "Geben Sie Ihr Deckname ein."
+msgstr "Geben Sie Ihren Deckname ein"
 
 #: source_templates/lookup.html:8
 msgid "A journalist has been waiting for you to log in again so SecureDrop can generate a crypto key for you. Now that you have logged in, they are able to write you a reply. Check back later for replies."
-msgstr "Ein Journalist wurde warten auf Sie wieder anmelden, damit SecureDrop kann eine Krypto-Schlüssel für Sie zu generieren. 
-Nun, da Sie sich angemeldet haben, ist er/sie in der Lage, Ihnen eine Antwort zu schreiben. Prüfen Sie später wieder für die Antworten."
+msgstr "Ein Journalist wartet darauf, dass Sie sich wieder anmelden, damit SecureDrop Ihnen einen Schlüssel generieren kann und er Ihnen damit eine Antwort schreiben kann. Kommen Sie später zurück, um nach Antworten zu sehen."
 
 #: source_templates/lookup.html:11
 msgid "Submit documents and messages"
@@ -641,7 +639,7 @@ msgstr "Sie können eine Datei, eine Nachricht oder beides senden."
 
 #: source_templates/lookup.html:22
 msgid "Maximum upload size: 500 MB"
-msgstr "Maximale Hocladengröße: 500 MB"
+msgstr "Maximale Uploadgröße: 500 MB"
 
 #: source_templates/lookup.html:25
 msgid "Add message"
@@ -713,17 +711,17 @@ msgstr "Werden Sie benötigen, den Schlüssel zu identifizieren (dies wird als d
 
 #: source_templates/why-journalist-key.html:17
 msgid "On all systems, open the Terminal and use this gpg command: <code>gpg --recipient &lt;user ID&gt; --encrypt roswell_photos.pdf</code>"
-msgstr "Auf allen Systemen, öffnen Sie die Kommandozeile (Terminal), und benutzen dieses gpg Kommando: <code>gpg --recipient &lt;Benutzer ID&gt; --encrypt bielefeld_fotos.pdf</code>"
+msgstr "Auf allen Systemen: Öffnen Sie die Kommandozeile (Terminal) und benutzen das folgende gpg-Kommando: <code>gpg --recipient &lt;Benutzer ID&gt; --encrypt bielefeld_fotos.pdf</code>"
 
 #: source_templates/why-journalist-key.html:20
 msgid "Upload your encrypted submission. It will have the same filename as the unencrypted file, with .gpg at the end (e.g. <code>roswell_photos.pdf.gpg</code>)"
-msgstr "Hochladen Sie Ihre verschlüsselte Datei. Es wird der glieche Dateiname als die unverschlüsselte Datei, aber mit .gpg um die Ende (z.B. <code>bielefeld_fotos.pdf.gpg</code>)."
+msgstr "Laden Sie ihre verschlüsselte Datei hoch. Sie wird gleich heißen, wie die unverschlüsselte Datei, aber mit .gpg enden (z.B. <code>bielefeld_fotos.pdf.gpg</code>)."
 
 #: source_templates/why-journalist-key.html:23
 msgid "<strong>Tip:</strong> If you wish to remain anonymous, <strong>do not</strong> use GPG to sign the encrypted file (with the <code>--sign</code> or <code>-s</code> flag) as this will reveal your GPG identity to us."
-msgstr "<strong>Hinweis:</strong> Wenn Sie anonym bleiben wünschen, <strong>Benutzen Sie nicht</strong> GPG die verschlüsselte Datei (mit der Option <code>--sign</code> oder <code>-s</code>) unterschreiben, denn es wird Ihre Identität uns zeigen."
+msgstr "<strong>Hinweis:</strong> Verwenden Sie <strong>nicht</strong> die Signaturfunktion von GPG (mit der Option <code>--sign</code> oder <code>-s</code>), denn das würde Ihre Identität verraten."
 
 #: source_templates/why-journalist-key.html:25
 msgid "Back to submission page"
-msgstr "Zurück nach der Einreichungen-Seite"
+msgstr "Zurück zur Einreichungsseite"
 

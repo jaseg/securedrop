@@ -12,6 +12,7 @@ import readline  # makes the add_admin prompt kick ass
 from getpass import getpass
 import signal
 from time import sleep
+import version
 
 import qrcode
 import psutil
@@ -221,65 +222,70 @@ def clean_tmp():
             os.remove(path)
 
 
-def add_translations():
+def add_translation():
     cmd = [
         'pybabel',
         'init',
-        '-i', BABEL_MESSAGES_FILE,
-        '-d', BABEL_TRANSLATIONS_DIR,
-        '-l', sys.argv[3],
+        '--input-file=' + BABEL_MESSAGES_FILE,
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--locale=' + sys.argv[2],
         '--no-wrap',
     ]
-    try:
-        subprocess.check_output(cmd)
-    except CalledProcessError as e:
-        print e.output
-        sys.exit(e.returncode)
+    run_cmd(cmd)
 
 
 def update_translations():
     cmd = [
         'pybabel',
         'extract',
-        '-F', './babel.cfg',
-        '-o', BABEL_MESSAGES_FILE,
-        '--no-wrap',
+        '--charset=utf-8',
+        '--mapping=./babel.cfg',
+        '--output=' + BABEL_MESSAGES_FILE,
         '--project=SecureDrop',
-        '.,source_templates,journalist_templates'
+        "--version=\\'{}\\'".format(version.__version__),
+        "--msgid-bugs-address=\\'securedrop@freedom.press\\'",
+        "--copyright-holder=\\'Freedom of the Press Foundation\\'",
+        '--no-wrap',
+        # '--sort-by-file' TODO why does this option break?
+        '.',
+        'source_templates',
+        'journalist_templates',
     ]
-    try:
-        subprocess.check_output(cmd)
-    except CalledProcessError as e:
-        print e.output
-        sys.exit(e.returncode)
+    run_cmd(cmd)
 
     cmd = [
         'pybabel',
         'update',
-        '-i', BABEL_MESSAGES_FILE,
-        '-d', BABEL_TRANSLATIONS_DIR,
-        '-o', BABEL_MESSAGES_FILE,
+        '--locale=' + 'en_US',
+        '--input-file=' + BABEL_MESSAGES_FILE,
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--output-dir=' + BABEL_TRANSLATIONS_DIR,
         '--no-wrap',
         '--ignore-obsolete',
     ]
-    try:
-        subprocess.check_output(cmd)
-    except CalledProcessError as e:
-        print e.output
-        sys.exit(e.returncode)
+    run_cmd(cmd)
 
 
 def compile_translations():
     cmd = [
         'pybabel',
         'compile',
-        '-d', BABEL_TRANSLATIONS_DIR,
+        '--locale=' + 'en_US',
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--statistics'
     ]
+    run_cmd(cmd)
+
+
+def run_cmd(cmd):
     try:
         subprocess.check_output(cmd)
     except CalledProcessError as e:
+        print '[ERROR] Subprocess had non-zero exit code: ' + str(e.returncode)
+        print e.message
         print e.output
         sys.exit(e.returncode)
+
 
 def main():
     valid_cmds = [
@@ -289,7 +295,7 @@ def main():
         "reset",
         "add_admin",
         "clean_tmp",
-        "add_translations",
+        "add_translation",
         "update_translations",
         "compile_translations"]
     help_str = "./manage.py {{ {0} }}".format(', '.join(valid_cmds))

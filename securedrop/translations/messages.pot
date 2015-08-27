@@ -1,18 +1,17 @@
-# English (United States) translations for UNKNOWN.
-# Copyright (C) 2015 ORGANIZATION
-# This file is distributed under the same license as the UNKNOWN project.
+# Translations template for SecureDrop.
+# Copyright (C) 2015 \'Freedom of the Press Foundation\'
+# This file is distributed under the same license as the SecureDrop project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: UNKNOWN 0.0.0\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-08-23 12:12+0000\n"
+"Project-Id-Version: SecureDrop \\'0.3.4\\'\n"
+"Report-Msgid-Bugs-To: \\'securedrop@freedom.press\\'\n"
+"POT-Creation-Date: 2015-08-23 13:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en_US <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"

@@ -1,3 +1,4 @@
+
 # Last Modified: Wed Oct 29 08:16:32 2014
 #include <tunables/global>
 
@@ -120,6 +121,7 @@
   /var/www/* rw,
   /var/www/document.wsgi r,
   /var/www/securedrop/ r,
+  /var/www/securedrop/babel.cfg r,
   /var/www/securedrop/config.py r,
   /var/www/securedrop/config.pyc rw,
   /var/www/securedrop/crypto_util.py r,
@@ -191,6 +193,10 @@
   /var/www/securedrop/store/** rw,
   /var/www/securedrop/template_filters.py r,
   /var/www/securedrop/template_filters.pyc rw,
+  /var/www/securedrop/translations/ r,
+  /var/www/securedrop/translations/de_DE/ r,
+  /var/www/securedrop/translations/de_DE/LC_MESSAGES/ r,
+  /var/www/securedrop/translations/de_DE/LC_MESSAGES/message.mo r,
   /var/www/securedrop/version.py r,
   /var/www/securedrop/version.pyc rw,
   /var/www/securedrop/wordlist r,

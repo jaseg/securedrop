@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/font-awesome.css" type="text/css" media="all" />
     <link rel="icon" type="image/png" href="/static/i/favicon.png">
     <script src="/static/js/libs/jquery-2.1.1.min.js"></script>
+    {% include 'js-strings.html' %}
     <script src="/static/js/journalist.js"></script>
     {% block extrahead %}{% endblock %}
   </head>
@@ -16,9 +17,9 @@
     {% if g.user %}
     <div id="logout">
       {% if g.user and g.user.is_admin %}
-      <a href="{{ url_for('admin_index') }}">Admin</a> | 
+      <a href="{{ url_for('admin_index') }}">{{ gettext('Admin') }}</a> |
       {% endif %}
-      <a href="{{ url_for('logout') }}">Logout</a>
+      <a href="{{ url_for('logout') }}">{{ gettext('Logout') }}</a>
     </div>
     <div class="clearfix"></div>
     {% endif %}
@@ -29,8 +30,7 @@
         <a href="{{ url_for('index') }}"><img src="/static/i/{{ header_image }}" class="logo small" alt="SecureDrop"></a>
         {% if use_custom_header_image %}
         <div class="powered">
-          Powered by<br/>
-          <img src="/static/i/securedrop_small.png" alt="SecureDrop">
+          {{ gettext('Powered by <br/> <img src="/static/i/securedrop_small.png" alt="SecureDrop">') }}
         </div>
         {% endif %}
       </div>
@@ -44,8 +44,9 @@
 
       {% block footer %}
       <footer>
-        Powered by <em>SecureDrop {{ version }}</em>.
+        {{ gettext("Powered by <em>SecureDrop {version}</em>.").format(version=version)|safe }}
       </footer>
+      {% include 'locales.html' %}
       {% endblock %}
     </div>
   </body>

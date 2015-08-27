@@ -23,7 +23,6 @@ import qrcode
 import qrcode.image.svg
 
 import config
-import crypto_util
 import store
 
 LOGIN_HARDENING = True
@@ -371,8 +370,10 @@ class Journalist(Base):
         # ...and reject it if they have exceeded the threshold
         login_attempt_period = datetime.datetime.utcnow() - \
             datetime.timedelta(seconds=_LOGIN_ATTEMPT_PERIOD)
+
         attempts_within_period = JournalistLoginAttempt.query.filter(
             JournalistLoginAttempt.timestamp > login_attempt_period).all()
+
         if len(attempts_within_period) > _MAX_LOGIN_ATTEMPTS_PER_PERIOD:
             raise LoginThrottledException(
                 "throttled ({} attempts in last {} seconds)".format(
@@ -381,9 +382,11 @@ class Journalist(Base):
 
     @classmethod
     def login(cls, username, password, token):
+        user = None
         try:
             user = Journalist.query.filter_by(username=username).one()
         except NoResultFound:
+            print 'lol'
             raise InvalidUsernameException(
                 "invalid username '{}'".format(username))
 

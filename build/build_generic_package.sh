@@ -14,6 +14,7 @@ PACKAGE_PATH="/vagrant/install_files/$PACKAGE_NAME"
 
 umask 022
 
+# TODO this is redundant in the build_generic function
 if [ ! -d $BUILD_PATH ]; then
     mkdir $BUILD_PATH
 fi

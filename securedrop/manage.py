@@ -6,16 +6,22 @@ import os
 import select
 import shutil
 import subprocess
+from subprocess import CalledProcessError
 import unittest
 import readline  # makes the add_admin prompt kick ass
 from getpass import getpass
 import signal
 from time import sleep
+import version
 
 import qrcode
 import psutil
 
 from db import db_session, Journalist
+
+from babel.messages import frontend as babel
+from babel.messages.extract import DEFAULT_KEYWORDS as BABEL_DEFAULT_KEYWORDS
+from distutils.dist import Distribution
 
 from management import run
 
@@ -31,6 +37,9 @@ os.environ['SECUREDROP_ENV'] = 'dev'
 # When refactoring the test suite, the TEST_WORKER_PIDFILE
 # TEST_WORKER_PIDFILE is also hard-coded in `tests/common.py`.
 TEST_WORKER_PIDFILE = "/tmp/securedrop_test_worker.pid"
+
+BABEL_TRANSLATIONS_DIR = './translations'
+BABEL_MESSAGES_FILE = './translations/messages.pot'
 
 
 def get_pid_from_pidfile(pid_file_name):
@@ -123,13 +132,14 @@ def add_admin():
 
     while True:
         password = getpass("Password: ")
-        password_again = getpass("Confirm Password: ")
 
         if len(password) > Journalist.MAX_PASSWORD_LEN:
             print ("Your password is too long (maximum length {} characters). "
                    "Please pick a shorter password.".format(
                    Journalist.MAX_PASSWORD_LEN))
             continue
+
+        password_again = getpass("Confirm Password: ")
 
         if password == password_again:
             break
@@ -212,6 +222,71 @@ def clean_tmp():
             os.remove(path)
 
 
+def add_translation():
+    cmd = [
+        'pybabel',
+        'init',
+        '--input-file=' + BABEL_MESSAGES_FILE,
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--locale=' + sys.argv[2],
+        '--no-wrap',
+    ]
+    run_cmd(cmd)
+
+
+def update_translations():
+    cmd = [
+        'pybabel',
+        'extract',
+        '--charset=utf-8',
+        '--mapping=./babel.cfg',
+        '--output=' + BABEL_MESSAGES_FILE,
+        '--project=SecureDrop',
+        "--version=\\'{}\\'".format(version.__version__),
+        "--msgid-bugs-address=\\'securedrop@freedom.press\\'",
+        "--copyright-holder=\\'Freedom of the Press Foundation\\'",
+        '--no-wrap',
+        # '--sort-by-file' TODO why does this option break?
+        '.',
+        'source_templates',
+        'journalist_templates',
+    ]
+    run_cmd(cmd)
+
+    cmd = [
+        'pybabel',
+        'update',
+        '--locale=' + 'en_US',
+        '--input-file=' + BABEL_MESSAGES_FILE,
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--output-dir=' + BABEL_TRANSLATIONS_DIR,
+        '--no-wrap',
+        '--ignore-obsolete',
+    ]
+    run_cmd(cmd)
+
+
+def compile_translations():
+    cmd = [
+        'pybabel',
+        'compile',
+        '--locale=' + 'en_US',
+        '--domain=' + BABEL_TRANSLATIONS_DIR,
+        '--statistics',
+    ]
+    run_cmd(cmd)
+
+
+def run_cmd(cmd):
+    try:
+        subprocess.check_output(cmd)
+    except CalledProcessError as e:
+        print '[ERROR] Subprocess had non-zero exit code: ' + str(e.returncode)
+        print e.message
+        print e.output
+        sys.exit(e.returncode)
+
+
 def main():
     valid_cmds = [
         "run",
@@ -219,10 +294,13 @@ def main():
         "test",
         "reset",
         "add_admin",
-        "clean_tmp"]
-    help_str = "./manage.py {{{0}}}".format(','.join(valid_cmds))
+        "clean_tmp",
+        "add_translation",
+        "update_translations",
+        "compile_translations"]
+    help_str = "./manage.py {{ {0} }}".format(', '.join(valid_cmds))
 
-    if len(sys.argv) != 2 or sys.argv[1] not in valid_cmds:
+    if len(sys.argv) < 2 or sys.argv[1] not in valid_cmds:
         print help_str
         sys.exit(1)
 

@@ -11,6 +11,7 @@ import operator
 from flask import (Flask, request, render_template, session, redirect, url_for,
                    flash, abort, g, send_file)
 from flask_wtf.csrf import CsrfProtect
+from flask.ext.babel import Babel, gettext, lazy_gettext, ngettext
 
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from sqlalchemy.exc import IntegrityError
@@ -46,8 +47,22 @@ else:
     app.jinja_env.globals['header_image'] = 'logo.png'
     app.jinja_env.globals['use_custom_header_image'] = False
 
-app.jinja_env.filters['datetimeformat'] = template_filters.datetimeformat
+app.jinja_env.filters['rel_datetimeformat'] = template_filters.rel_datetimeformat
 app.jinja_env.filters['nl2br'] = evalcontextfilter(template_filters.nl2br)
+
+# Initialize translations
+app.jinja_env.globals['gettext'] = gettext
+app.jinja_env.globals['ngettext'] = ngettext
+babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale():
+    locale = session.get("locale") or request.accept_languages.best_match(config.LOCALES.keys())
+    if locale and locale in getattr(config, 'LOCALES', ['en_US']):
+        return locale
+    else:
+        return 'en_US'
 
 
 @app.teardown_appcontext
@@ -87,6 +102,21 @@ def setup_g():
     # ignore_static here because `crypto_util.hash_codename` is scrypt (very
     # time consuming), and we don't need to waste time running if we're just
     # serving a static resource that won't need to access these common values.
+
+    # Locale info for Babel
+    try:
+        if 'l' in request.args:
+            locale = request.args['l']
+            if locale in config.LOCALES.keys():
+                session['locale'] = locale
+            elif len(locale) == 0 and 'locale' in session:
+                del session['locale']
+    except AttributeError:
+        session['locale'] = 'en_US'
+    # Save the resolved locale in g for templates
+    g.resolved_locale = get_locale()
+    g.locales = getattr(config, 'LOCALES', None)
+
     if logged_in():
         g.codename = session['codename']
         g.sid = crypto_util.hash_codename(g.codename)
@@ -111,11 +141,11 @@ def setup_g():
 @ignore_static
 def check_tor2web():
         # ignore_static here so we only flash a single message warning about Tor2Web,
-        # corresponding to the intial page load.
+        # corresponding to the initial page load.
     if 'X-tor2web' in request.headers:
-        flash('<strong>WARNING:</strong> You appear to be using Tor2Web. '
-              'This <strong>does not</strong> provide anonymity. '
-              '<a href="/tor2web-warning">Why is this dangerous?</a>',
+        flash(gettext('<strong>WARNING:</strong> You appear to be using Tor2Web. '
+                      'This <strong>does not</strong> provide anonymity. '
+                      '<a href="/tor2web-warning">Why is this dangerous?</a>'),
               "banner-warning")
 
 
@@ -166,10 +196,9 @@ def generate():
 
     codename = generate_unique_codename(num_words)
     session['codename'] = codename
-    return render_template(
-        'generate.html',
-        codename=codename,
-        num_words=num_words)
+    return render_template('generate.html',
+                           codename=codename,
+                           num_words=num_words)
 
 
 @app.route('/create', methods=['POST'])
@@ -239,13 +268,11 @@ def lookup():
     if not crypto_util.getkey(g.sid) and g.source.flagged:
         async_genkey(g.sid, g.codename)
 
-    return render_template(
-        'lookup.html',
-        codename=g.codename,
-        replies=replies,
-        flagged=g.source.flagged,
-        haskey=crypto_util.getkey(
-            g.sid))
+    return render_template('lookup.html',
+                           codename=g.codename,
+                           replies=replies,
+                           flagged=g.source.flagged,
+                           haskey=crypto_util.getkey(g.sid))
 
 
 def normalize_timestamps(sid):
@@ -274,7 +301,7 @@ def submit():
 
     # Don't bother submitting anything if it was an "empty" submission. #878.
     if not (msg or fh):
-        flash("You must enter a message or choose a file to submit.", "error")
+        flash(gettext("You must enter a message or choose a file to submit."), "error")
         return redirect(url_for('lookup'))
 
     fnames = []
@@ -301,17 +328,16 @@ def submit():
 
     if first_submission:
         flash(
-            "Thanks for submitting something to SecureDrop! Please check back later for replies.",
+            gettext("Thanks for submitting something to SecureDrop! Please check back later for replies."),
             "notification")
     else:
         if msg:
-            flash("Thanks! We received your message.", "notification")
+            flash(gettext("Thanks! We received your message."), "notification")
         if fh:
-            flash(
-                '{} "{}".'.format(
-                    "Thanks! We received your document",
-                    fh.filename or '[unnamed]'),
-                "notification")
+            file_name = fh.filename or '[' + lazy_gettext('unnamed') + ']'
+            flash(gettext('Thanks! We received your document "{file_name}".')
+                  .format(file_name=file_name),
+                  "notification")
 
     for fname in fnames:
         submission = Submission(g.source, fname)
@@ -343,7 +369,7 @@ def delete():
     db_session.delete(reply)
     db_session.commit()
 
-    flash("Reply deleted", "notification")
+    flash(gettext("Reply deleted"), "notification")
     return redirect(url_for('lookup'))
 
 
@@ -376,7 +402,7 @@ def login():
         else:
             app.logger.info(
                     "Login failed for invalid codename".format(codename))
-            flash("Sorry, that is not a recognized codename.", "error")
+            flash(gettext("Sorry, that is not a recognized codename."), "error")
     return render_template('login.html')
 
 
